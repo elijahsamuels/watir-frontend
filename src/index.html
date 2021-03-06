@@ -16,6 +16,65 @@
 </head>
 <body>
 	
+    <div>
+        <h1 id="header">Your Garden: listGardenName</h1>
+    </div>
+
+    <div id="plants-container">
+        <h3>
+            Your Plants
+        </h3>
+    
+        <!-- <div id="search-div">
+            <input type="text" id="search"> 
+            <button id="searchButton">Search By Plant Name</button>
+        </div>
+        <button id="sort-name">Sort by plant names </button> -->
+    
+        <ul id="plants-list"></ul>
+        this we want to see:
+        <ul>the plant</ul>
+        <ul>height</ul>
+        <ul>when it was last watered</ul>
+        <ul>how much it was last watered</ul>
+        <ul>the grow zone</ul>
+        <ul>notes, if any?</ul>
+        <ul>date planted</ul>
+        <ul>the associated sensor</ul>
+        <ul>the associated sensor mac address</ul>
+        
+    </div>
+    
+    <div id="plant-submit-form">
+        <h3>Create a plant</h3>
+         <form id="plantform">
+             <label>Plant Name</label>
+             <input type="text" name="name" id="plant-submit-name">
+            <br>
+            <label>Plant height</label>
+            <input type="text" name="plant-height" id="plant-submit-height">
+            <br>
+            <label>Plant grow zone</label>
+            <input type="text" name="plant-grow-zone" id="plant-submit-grow-zone">
+            <br>
+            <label>Notes</label>
+            <textarea cols="25" name="plant-notes" rows="8" id="plant-submit-notes"></textarea>
+            <br>
+            <label>Plant sensor</label>
+            <input type="text" name="sensor" id="plant-submit-sensor">
+            <br>
+            <label>Plant sensor mac address</label>
+            <input type="text" name="sensor-macaddress" id="plant-submit-sensor-macaddress">
+            <br>
+
+            <input type="submit" value="Add a Plant" id="plant-submit">
+         </form>
+    </div>
+
+
+
+
+
  	<!-- Javascript Frontend files -->
 	<script type="text/javascript" src="index.js"></script>
 
