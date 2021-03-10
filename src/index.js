@@ -9,7 +9,7 @@ const plantSubmitHeight = document.getElementById('plant-submit-height')
 const plantSubmitGrowZone = document.getElementById('plant-submit-grow-zone')
 const plantSubmitNotes = document.getElementById('plant-submit-notes')
 const plantSubmitSensor = document.getElementById('plant-submit-sensor')
-const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-macaddress')
+const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-mac-address')
 const plantSubmit = document.getElementById('plant-submit')
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,9 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		const plantSubmitGrowZone = document.getElementById('plant-submit-grow-zone').value
 		const plantSubmitNotes = document.getElementById('plant-submit-notes').value
 		const plantSubmitSensor = document.getElementById('plant-submit-sensor').value
-		const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-macaddress').value
+		const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-mac-address').value
+		const plantSubmitFarmID = document.getElementById('plant-submit-farm-name').value
+
 		const plantSubmit = document.getElementById('plant-submit')
-		postFetch(plantSubmitForm, plantSubmitName, plantSubmitHeight, plantSubmitGrowZone, plantSubmitNotes, plantSubmitSensor, plantSubmitSenorMacAddress)
+		postFetch(plantSubmitForm, plantSubmitName, plantSubmitHeight, plantSubmitGrowZone, plantSubmitNotes, plantSubmitSensor, plantSubmitSenorMacAddress, plantSubmitFarmID)
 	
 	}, false);
 	
@@ -44,48 +46,54 @@ function getPlants() {
 			<fieldset disabled>
             <!-- // PLANT NAME -->
             <label for=${plant.name}-${plant.id}>Plant name:</label>
-            <input type="text" id=${plant.name}-${plant.id} name=${plant.name}-${plant.id} value=${titleCase(plant.name)}><br>
+            <input type="text" id=${plant.name}-${plant.id} name=${plant.name}-${plant.id} value="${titleCase(plant.name)}"><br>
             
             <!-- // PLANT HEIGHT -->
             <label for=${plant.name}-${plant.height}>Height (inches):</label>
-            <input type="text" id=${plant.name}-${plant.id}-height" name=${plant.name}-${plant.id}-height" value=${plant.height}><br>
+            <input type="text" id="${plant.name}-${plant.id}-height" name="${plant.name}-${plant.id}-height" value=${plant.height}><br>
             
             <!-- // PLANT NOTES -->
-            <label for=${plant.name}-${plant.id}-notes">Notes:</label>
-            <textarea id=${plant.name}-${plant.id}-notes" name=${plant.name}-${plant.id}-notes" value=></textarea><br>
+            <label for=${plant.name}-${plant.id}-notes>Notes:</label>
+            <textarea id="${plant.name}-${plant.id}-notes" name="${plant.name}-${plant.id}-notes" >${plant.notes}</textarea><br>
             
             <!-- // PLANT LAST WATERED -->
-            <label for=${plant.name}-${plant.id}-last-watered">Last watered:</label>
-            <input type="text" id=${plant.name}-${plant.id}-last-watered" name=${plant.name}-${plant.id}-last-watered" value=${plant.last_watered}><br>
+            <label for=${plant.name}-${plant.id}-last-watere">Last watered:</label>
+            <input type="text" id="${plant.name}-${plant.id}-last-watered" name="${plant.name}-${plant.id}-last-watered" value="${plant.last_watered}"><br>
             
             <!-- // PLANT LAST WATERED DURATION -->
-            <label for=${plant.name}-${plant.id}-last-watered-duration">Last watered duration (seconds):</label>
-            <input type="text" id=${plant.name}-${plant.id}-last-watered-duration" name=${plant.name}-${plant.id}-last-watered-duration" value=${plant.last_watered_amount}><br>
+            <label for=${plant.name}-${plant.id}-last-watered-duration>Last watered duration (seconds):</label>
+            <input type="text" id="${plant.name}-${plant.id}-last-watered-duration" name="${plant.name}-${plant.id}-last-watered-duration" value="${plant.last_watered_amount}"><br>
             
             <!-- // PLANT GROW ZONE -->
-            <label for=${plant.name}-${plant.id}-grow-zone">Grow zone:</label>
-            <input type="text" id=${plant.name}-${plant.id}-grow-zone" name=${plant.name}-${plant.id}-grow-zone" value=${plant.grow_zone}><br>
+            <label for=${plant.name}-${plant.id}-grow-zone>Grow zone:</label>
+            <input type="text" id="${plant.name}-${plant.id}-grow-zone" name="${plant.name}-${plant.id}-grow-zone" value="${plant.grow_zone}"><br>
             
             <!-- // PLANTED DATE -->
-            <label for=${plant.name}-${plant.id}-planted-date">Planted date:</label>
-            <input type="text" id=${plant.name}-${plant.id}-planted-date" name=${plant.name}-${plant.id}-planted-date" value=${plant.planted_date}><br>
+            <label for=${plant.name}-${plant.id}-planted-date>Planted date:</label>
+            <input type="text" id="${plant.name}-${plant.id}-planted-date" name="${plant.name}-${plant.id}-planted-date" value="${plant.planted_date}"><br>
             
             <!-- // SENSOR TYPE -->
-            <label for=${plant.name}-${plant.id}-sensor-type">Sensor type:</label>
-            <input type="text" id=${plant.name}-${plant.id}-sensor-type" name=${plant.name}-${plant.id}-sensor-type" value=${plant.sensor.sensor_type}><br>
+            <label for=${plant.name}-${plant.id}-sensor-type>Sensor type:</label>
+            <input type="text" id="${plant.name}-${plant.id}-sensor-type" name="${plant.name}-${plant.id}-sensor-type" value="${plant.sensor.sensor_type}"><br>
 			
             <!-- // SENSOR MAC ADDRESS -->
-            <label for=${plant.name}-${plant.id}-sensor-type">Sensor MAC address:</label>
-            <input type="text" id=${plant.name}-${plant.id}-sensor-type" name=${plant.name}-${plant.id}-sensor-type" value=${plant.sensor.mac_address}><br>
+            <label for=${plant.name}-${plant.id}-mac-address>Sensor MAC address:</label>
+            <input type="text" id="${plant.name}-${plant.id}-mac-address" name="${plant.name}-${plant.id}-mac-address" value="${plant.sensor.mac_address}"><br>
 			
             <!-- // FARM NAME -->
-            <label for=${plant.name}-${plant.id}-farm-name">Farm name:</label>
-            <input type="text" id=${plant.name}-${plant.id}-farm-name" name=${plant.name}-${plant.id}-farm-name" value=${plant.farm.name}><br>
-            
-            </fieldset>    
+            <label for=${plant.name}-${plant.id}-farm-name>Farm name:</label>
+            <input type="text" id="${plant.name}-${plant.id}-farm-name" name="${plant.name}-${plant.id}-farm-name" value="${plant.farm.name}"><br>
 			
+            <!-- // FARM ID - HIDDEN FOR THE MOMENT
+            <label for=${plant.name}-${plant.id}-farm-id>Farm id:</label>
+            <input type="text" id="${plant.name}-${plant.id}-farm-id" name="${plant.name}-${plant.id}-farm-id" value="${plant.farm.id}"><br>
+            -->
+            </fieldset>    
+		
+			<!-- // BUTTONS -->
             <button id="water-plant-${plant.id}" class="water-button">Water ${titleCase(plant.name)}</button>
             <button id="edit-plant-${plant.id}" class="edit-plant-button">Edit ${titleCase(plant.name)}</button>
+            <button id="delete-plant-${plant.id}" class="delete-plant-button">Remove ${titleCase(plant.name)}</button>
 			</div>
 			`;
 			
@@ -104,6 +112,55 @@ function getPlants() {
 	})
 }
 
+
+function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {
+ 
+	// const bodyData = {plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address}
+
+	fetch(baseURL, {
+	  // POST request
+	  method: "POST",
+	  headers: {"Content-Type": "application/json"},
+	  body: JSON.stringify({
+		name: plant_submit_name,
+		height: plant_submit_height,
+		grow_zone: plant_submit_grow_zone,
+		notes: plant_submit_notes,
+		sensor: plant_submit_sensor,
+		sensor_mac_address: plant_submit_senor_mac_address,
+		farm_id: farm_id
+	  })
+	})
+	.then(response => response.json())
+	.then(plant => {
+	  console.log(plant);
+	//   const plantData = plant.data
+	//   // render JSON response
+	//   let newPlant = new Plant(plantData, plantData.attributes)
+	//   document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
+	})
+  
+}
+
+// simple title casing for a string
+function titleCase(str) {
+	return str.toLowerCase().split(' ').map((word) => word.replace(word[0], word[0].toUpperCase())).join(' ');
+	}
+
+// function waterPlant(plant) {
+// 	document.getElementById(`water-plant-${plant.id}`).onclick(
+// 		console.log("you clicked the edit plant button")
+
+// 	)
+// }
+
+
+	
+// function waterPlant() {
+// 	console.log("this is watering the plant")
+// }
+
+
 // function submitNewPlant(e) {
 // 	// plantSubmit.addEventListener("click", (e) => {
 // 	// console.log("Add plant default prevented!")
@@ -120,55 +177,6 @@ function getPlants() {
 // 	postFetch(plantSubmitForm, plantSubmitName, plantSubmitHeight, plantSubmitGrowZone, plantSubmitNotes, plantSubmitSensor, plantSubmitSenorMacAddress)
 	
 // 	};
-
-function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address) {
- 
-	// const bodyData = {plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address}
-
-	fetch(baseURL, {
-	  // POST request
-	  method: "POST",
-	  headers: {"Content-Type": "application/json"},
-	  body: JSON.stringify({
-		name: plant_submit_name,
-		height: plant_submit_height,
-		grow_zone: plant_submit_grow_zone,
-		notes: plant_submit_notes,
-		sensor: plant_submit_sensor,
-		// sensor_mac_address: plant_submit_senor_mac_address
-	  })
-	})
-	.then(response => response.json())
-	.then(plant => {
-	  console.log(plant);
-	//   const plantData = plant.data
-	//   // render JSON response
-	//   let newPlant = new Plant(plantData, plantData.attributes)
-	//   document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
-	})
-  
-}
-
-
-
-// function waterPlant(plant) {
-// 	document.getElementById(`water-plant-${plant.id}`).onclick(
-// 		console.log("you clicked the edit plant button")
-
-// 	)
-// }
-
-
-
-// simple title casing for a string
-function titleCase(str) {
-	return str.toLowerCase().split(' ').map((word) => word.replace(word[0], word[0].toUpperCase())).join(' ');
-	}
-	
-// function waterPlant() {
-// 	console.log("this is watering the plant")
-// }
-
 
 
 			// // const waterButton = document.getElementById(`water-plant-${plant.id}`)

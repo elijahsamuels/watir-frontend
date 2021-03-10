@@ -56,11 +56,25 @@
             <label>Notes</label>
             <textarea name="plant-notes" cols="25" rows="8" id="plant-submit-notes"></textarea>
             <br>
-            <label>Plant sensor</label>
-            <input type="text" name="sensor" id="plant-submit-sensor">
+            <label>Plant sensor type</label>
+            <!-- <input type="text" name="sensor" id="plant-submit-sensor">
+            <br> -->
+            <select name="sensor" id="plant-submit-sensor" disabled>
+                <option id="1" value="water" name="water">Water</option>
+                <option id="2" value="light" name="light">Light</option>
+                <option id="3" value="temperature" name="temperature">Temperature</option>
+              </select>
             <br>
             <label>Plant sensor mac address</label>
-            <input type="text" name="sensor-macaddress" id="plant-submit-sensor-macaddress">
+            <input type="text" name="sensor-mac-address" id="plant-submit-sensor-mac-address">
+            <br>
+
+            <label>Farm name</label>
+            <select name="plant-submit-farm-name" id="plant-submit-farm-name" disabled>
+                <option id="1" value="1" name="home">Home</option>
+                <option id="2" value="2" name="backyard">Backyard</option>
+                <option id="3" value="3" name="frontyard">Frontyard</option>
+              </select>
             <br>
 
             <input type="submit" value="Add a Plant" id="plant-submit">
