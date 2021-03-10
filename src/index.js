@@ -108,8 +108,68 @@ function getPlants() {
 			// })
 
 			
-		})							
+		})
+		getAllWaterButton()					
 	})
+}
+
+
+function getAllWaterButton() {
+	let allWaterButtons = Array.from(document.getElementsByClassName('water-button'))
+	allWaterButtons.forEach( e => {
+		e.addEventListener("click", waterPlant)
+	})
+}
+
+function waterPlant(e) {
+	e.target.previousElementSibling.children[10].value = Date.now()
+}
+
+
+// function getPlants() { 
+// 	fetch(baseURL + plant.id + "/edit")
+// 	.then(response => response.json())
+// 	// .then(handlePlants)
+// 	.then(plants => {
+// 		plants.forEach(plant => {
+// 			const plantCard = 
+
+
+// // use this for the response FROM the fetch
+// 			function waterEvent(plant) {
+// 				console.log(`hello button ${plant.name}`);
+// 				document.getElementById(`${plant.id}-last-water`).innerText = Date();
+// 				document.querySelector("#\\31  > thead > tr:nth-child(4)").innerText = Date(); // this ONLY works for this specific spot, NOT each value.
+
+// 			// increment plant.last_watered
+
+// 			// send GPIO.
+// 			};
+
+
+
+
+
+
+
+
+
+
+			// function editPlantButton(plant) {
+			// 	console.log(`hello ${plant.name} edit button`);
+
+			// };
+
+
+
+
+
+function getAllEditButton() {
+
+}
+
+function getAllDeleteButton() {
+
 }
 
 
@@ -179,16 +239,16 @@ function titleCase(str) {
 // 	};
 
 
-			// // const waterButton = document.getElementById(`water-plant-${plant.id}`)
-			// // waterButton.addEventListener("click", function() {
-			// // 	console.log(plant.id + " water button was clicked")
-			// // 	// this.style.backgroundColor = "red";
-			// //   });
+			// const waterButton = document.getElementById(`water-plant-${plant.id}`)
+			// waterButton.addEventListener("click", function() {
+			// 	console.log(plant.id + " water button was clicked")
+			// 	// this.style.backgroundColor = "red";
+			//   });
 
 
-			// // let editPlantButton = document.getElementById(`edit-plant-${plant.id}`)
+			// let editPlantButton = document.getElementById(`edit-plant-${plant.id}`)
 
-			// // document.getElementById(`edit-plant-${plant.id}`).addEventListener("click", editPlant);
+			// document.getElementById(`edit-plant-${plant.id}`).addEventListener("click", editPlant);
 			// let editPlant = document.getElementById(`edit-plant-${plant.id}`)
 			// editPlant.onclick = function() {
 			// 	console.log("you clicked the edit plant button")
