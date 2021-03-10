@@ -13,61 +13,96 @@ const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-
 const plantSubmit = document.getElementById('plant-submit')
 
 document.addEventListener('DOMContentLoaded', () => {
-	getPlants();
+	getPlants()
 })
 
 function getPlants() {
 	fetch(baseURL)
 	.then(response => response.json())
-	.then(handlePlants)
+	// .then(handlePlants)
+	.then(plants => {
+		plants.forEach(plant => {
+			const plantCard = `
+
+        <fieldset disabled>
+            <!-- // PLANT NAME -->
+            <label for=${plant.name}-${plant.id}>Plant name:</label>
+            <input type="text" id=${plant.name}-${plant.id} name=${plant.name}-${plant.id} value=${titleCase(plant.name)}><br>
+            
+            <!-- // PLANT HEIGHT -->
+            <label for=${plant.name}-${plant.height}>Height (inches):</label>
+            <input type="text" id= ${plant.name}-${plant.id}-height" name=${plant.name}-${plant.id}-height" value=${plant.height}><br>
+            
+            <!-- // PLANT NOTES -->
+            <label for=${plant.name}-${plant.id}-notes">Notes:</label>
+            <input type="textarea" id= ${plant.name}-${plant.id}-notes" name=${plant.name}-${plant.id}-notes" value=><br>
+            
+            <!-- // PLANT LAST WATERED -->
+            <label for=${plant.name}-${plant.id}-last-watered">Last watered:</label>
+            <input type="text" id= ${plant.name}-${plant.id}-last-watered" name=${plant.name}-${plant.id}-last-watered" value=${plant.last_watered}><br>
+            
+            <!-- // PLANT LAST WATERED DURATION -->
+            <label for=${plant.name}-${plant.id}-last-watered-duration">Last watered duration:</label>
+            <input type="text" id= ${plant.name}-${plant.id}-last-watered-duration" name=${plant.name}-${plant.id}-last-watered-duration" value=${plant.last_watered_amount}><br>
+            
+            <!-- // PLANT GROW ZONE -->
+            <label for=${plant.name}-${plant.id}-grow-zone">Grow zone:</label>
+            <input type="text" id= ${plant.name}-${plant.id}-grow-zone" name=${plant.name}-${plant.id}-grow-zone" value=${plant.grow_zone}><br>
+            
+            <!-- // PLANTED DATE -->
+            <label for=${plant.name}-${plant.id}-planted-date">Planted date:</label>
+            <input type="text" id= ${plant.name}-${plant.id}-planted-date" name=${plant.name}-${plant.id}-planted-date" value=${plant.planted_date}><br>
+            
+            <!-- // SENSOR TYPE -->
+            <label for=${plant.name}-${plant.id}-sensor-type">Sensor type:</label>
+            <input type="text" id= ${plant.name}-${plant.id}-sensor-type" name=${plant.name}-${plant.id}-sensor-type" value=${plant.sensor_id.sensor_type}><br>
+                    
+            <!-- // FARM NAME -->
+            <label for=${plant.name}-${plant.id}-farm-name">Farm name:</label>
+            <input type="text" id= ${plant.name}-${plant.id}-farm-name" name=${plant.name}-${plant.id}-farm-name" value=${plant.farm.name}><br>
+            
+            </fieldset>    
+			
+            <button id="water-plant-${plant.id}">Water ${titleCase(plant.name)}</button>
+            <button id="edit-plant-${plant.id}">Edit ${titleCase(plant.name)}</button>
+		</div>
+		`;
+			
+		document.getElementById('plants-container').innerHTML += plantCard;
+		const waterButton = document.getElementById(`water-plant-${plant.id}`)
+		const editPlantButton = document.getElementById(`edit-plant-${plant.id}`)
+		
+		})
+	})
 }
 
-function handlePlants(plantsArray) {
+function handlePlants(plantsArray) {65
 	plantsArray.forEach((plant) => {plantCard(plant)});
 }
 
-// trying to create a table via JS
-
 function plantCard(plant) {
-	console.log(plant);
 
-	let plantTable = document.getElementById('plants-container')
-	let table = document.createElement('table')
-	let header = table.createTHead()
-	let row = header.insertRow();
-	let cell1 = row.insertCell();
-	let cell2 = row.insertCell();
-	let cell3 = row.insertCell();
-	let cell4 = row.insertCell();
-	let cell5 = row.insertCell();
-	let cell6 = row.insertCell();
-	let cell7 = row.insertCell();
-		let farmName = plant.farm.name
-
-	table.id = plant.id
-	cell1.innerText = (`Height: ${plant.height}`)
-	cell2.innerText = (`Notes: ${plant.notes}`)
-	cell3.innerText = (`Last watered: ${plant.last_watered}`)
-	cell4.innerText = (`Last watered duration: ${plant.last_watered_amount} seconds`)
-	cell5.innerText = (`Grow zone: ${plant.grow_zone}`)
-	cell6.innerText = (`Planted date: ${plant.planted_date}`)
-	cell7.innerText = (`Sensor type: ${plant.sensor_id.sensor_type}`)
-	header.innerText = titleCase(plant.name)
-	plantTable.appendChild(header)
-	// plantTable.appendChild(table.id)
-	plantTable.appendChild(cell1)
-	plantTable.appendChild(cell2)
-	plantTable.appendChild(cell3)
-	plantTable.appendChild(cell4)
-	plantTable.appendChild(cell5)
-	plantTable.appendChild(cell6)
-	plantTable.appendChild(cell7)
-
-// debugger
+	let plantTable = document.getElementById('plants-container');
+	plantTable.innerHTML(`Hello!`)
 };
 
-// var newcell = newrow.insertCell(0) //insert new cell to row
 
+
+
+function waterEvent(plant) {
+	console.log(`hello button ${plant.name}`);
+	document.getElementById(`${plant.id}-last-water`).innerText = Date();
+	// document.querySelector("#\\31  > thead > tr:nth-child(4)").innerText = Date(); // this ONLY works for this specific spot, NOT each value.
+	
+// increment plant.last_watered
+
+// send GPIO.
+};
+
+// function editPlantButton(plant) {
+// 	console.log(`hello ${plant.name} edit button`);
+	
+// };
 
 
 // simple title casing for a string
