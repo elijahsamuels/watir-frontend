@@ -14,31 +14,10 @@ class Plant {
 		this.farm_name = plant.farm.name;
 		this.sensor_type = plant.sensor[0].sensor_type;
 		this.mac_address = plant.sensor[0].mac_address;
-
-		// HELP: 
-		// I don't know how to pass THIS around?
-		// don't understand how to place an eventlistener for this class. wont work in thet constructor method because the form isn't built yet, so we can't add the eventlistner to something that doesnt exist yet.
-
-		// console.log(this) 
-		// this.waterButton = addEventListener('click')
-		
-        // this.element = document.getElementById(`water-plant-${this.id}`)
-        // this.element.dataset["id"] = id
-        // this.element.id = `item-${id}`
-        
-        // this.element.addEventListener('click', console.log("heloo water button"))
-        // // this.element.addEventListener('click', this.handleLiClick)
-		
-		// this.document.getElementById(`water-plant-${this.id}`)
 		
 		Plant.all.push(this);
 	};
-	
-	// waterButton() {
-		// 	let button = document.getElementById(`water-plant-1`)
-		// 	// let button = document.getElementById(`water-plant-${this.id}`)
-		// 	button.addEventListener("click", console.log("heloo water button"))
-		// }
+	static all = [];
 		
 		// This renders all plants to the DOM
 		renderPlant() {
@@ -58,7 +37,7 @@ class Plant {
             <textarea id="${this.name}-${this.id}-notes" name="${this.name}-${this.id}-notes" >${this.notes}</textarea><br>
             
             <!-- // PLANT LAST WATERED -->
-            <label for=${this.name}-${this.id}-last-watere">Last watered:</label>
+            <label for=${this.name}-${this.id}-last-watere">Last watered:</label> 
             <input type="text" id="${this.name}-${this.id}-last-watered" name="${this.name}-${this.id}-last-watered" value="${this.last_watered}"><br>
             
             <!-- // PLANT LAST WATERED DURATION -->
@@ -92,27 +71,51 @@ class Plant {
             </fieldset>    
 			
 			<!-- // BUTTONS -->
-            <button id="water-plant-${this.id}" class="water-button">Water ${titleCase(this.name)}</button>
-            <button id="edit-plant-${this.id}" class="edit-plant-button">Edit ${titleCase(this.name)}</button>
-            <button id="delete-plant-${this.id}" class="delete-plant-button">Remove ${titleCase(this.name)}</button>
+            <button id="water-plant-${this.id}" data-id="${this.id}" class="water-button">Water ${titleCase(this.name)}</button>
+            <button id="edit-plant-${this.id}" data-id="${this.id}" class="edit-plant-button">Edit ${titleCase(this.name)}</button>
+            <button id="delete-plant-${this.id}" data-id="${this.id}" class="delete-plant-button">Remove ${titleCase(this.name)}</button>
 			</div>
 			`
 		}
 		
+		static getAllWaterButton() {
+			let allWaterButtons = Array.from(document.getElementsByClassName('water-button'))
+			allWaterButtons.forEach( e => {	e.addEventListener("click", Plant.waterPlant)
+			})
+		};
 
-	// getAllWaterButton() {
-	// 	let allWaterButtons = Array.from(document.getElementsByClassName('water-button'))
-	// 	allWaterButtons.forEach( e => {
-	// 		e.addEventListener("click", waterPlant)
-	// 	})
-	// };
+		static waterPlant(e) {
+			let plantID = e.target.dataset.id
 
+			e.target.previousElementSibling.children[10].value = currentDateTime();
+			let waterAmount = parseInt(e.target.previousElementSibling.children[13].value) 
+			e.target.previousElementSibling.children[13].value = waterAmount + 1
+			let plantNewWaterDate = e.target.previousElementSibling.children[10].value
+			let plantNewWaterDuration = e.target.previousElementSibling.children[13].value
+
+			plantAdapter.waterPlant(plantNewWaterDate, plantNewWaterDuration, plantID)
+
+		};
 	
-	// waterPlant(e) {
-	// 	e.target.previousElementSibling.children[10].value = Date.now()
-	// }
-	
+		// static getAllEditButton() {
+		// 	let allEditButtons = Array.from(document.getElementsByClassName('edit-plant-button'))
+		// 	allEditButtons.forEach( e => e.addEventListener("click", Plant.editPlant)
+		// 	)
+		// }
+
+		// static editPlant(e) {
+		// 	let plantID = e.target.dataset.id
+
+		// 	if (editPlantButton.innerText === "Edit " + titleCase(plant.name)) {
+		// 		editPlantButton.innerText = "Save " + titleCase(plant.name)
+		// 		// Save edits to the plant
+		// 	} else if (editPlantButton.innerText === "Save " + titleCase(plant.name)){
+		// 		editPlantButton.innerText = "Edit " + titleCase(plant.name)
+		// 	}
+
+		// }
+		
+
+
 
 };
-
-Plant.all = [];
