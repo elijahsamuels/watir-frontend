@@ -9,21 +9,26 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!--Import materialize.css-->
 	<!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
 	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 
 </head>
 <body>
 	
     <div>
-        <h1 id="header">Your Garden: listGardenName</h1>
+        <h3 id="header">Your Garden: listGardenName</h3>
     </div>
 
     <div id="plants-container">
 
-        <h3>Your Plants</h3>
-        
+        <h4>Your Plants</h4>
+        <button>Sort by name</button>needs work
         <!-- <div id="search-div">
             <input type="text" id="search"> 
             <button id="searchButton">Search By Plant Name</button>
@@ -42,7 +47,7 @@
     </div>
     
     <div id="plant-submit-form">
-        <h3>Create a plant</h3>
+        <h4>Create a plant</h4>
          <form id="plantform">
             <label>Plant Name</label>
             <input type="text" name="name" id="plant-submit-name">
@@ -86,6 +91,7 @@
 
 
  	<!-- Javascript Frontend files -->
+	<script type="text/javascript" src="plant.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 
     <!--JavaScript at end of body for optimized loading-->

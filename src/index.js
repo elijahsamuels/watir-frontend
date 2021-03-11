@@ -40,64 +40,11 @@ function getPlants() {
 	// .then(handlePlants)
 	.then(plants => {
 		plants.forEach(plant => {
-			const plantCard = `
-			<div>
 			
-			<fieldset disabled>
-            <!-- // PLANT NAME -->
-            <label for=${plant.name}-${plant.id}>Plant name:</label>
-            <input type="text" id=${plant.name}-${plant.id} name=${plant.name}-${plant.id} value="${titleCase(plant.name)}"><br>
-            
-            <!-- // PLANT HEIGHT -->
-            <label for=${plant.name}-${plant.height}>Height (inches):</label>
-            <input type="text" id="${plant.name}-${plant.id}-height" name="${plant.name}-${plant.id}-height" value=${plant.height}><br>
-            
-            <!-- // PLANT NOTES -->
-            <label for=${plant.name}-${plant.id}-notes>Notes:</label>
-            <textarea id="${plant.name}-${plant.id}-notes" name="${plant.name}-${plant.id}-notes" >${plant.notes}</textarea><br>
-            
-            <!-- // PLANT LAST WATERED -->
-            <label for=${plant.name}-${plant.id}-last-watere">Last watered:</label>
-            <input type="text" id="${plant.name}-${plant.id}-last-watered" name="${plant.name}-${plant.id}-last-watered" value="${plant.last_watered}"><br>
-            
-            <!-- // PLANT LAST WATERED DURATION -->
-            <label for=${plant.name}-${plant.id}-last-watered-duration>Last watered duration (seconds):</label>
-            <input type="text" id="${plant.name}-${plant.id}-last-watered-duration" name="${plant.name}-${plant.id}-last-watered-duration" value="${plant.last_watered_amount}"><br>
-            
-            <!-- // PLANT GROW ZONE -->
-            <label for=${plant.name}-${plant.id}-grow-zone>Grow zone:</label>
-            <input type="text" id="${plant.name}-${plant.id}-grow-zone" name="${plant.name}-${plant.id}-grow-zone" value="${plant.grow_zone}"><br>
-            
-            <!-- // PLANTED DATE -->
-            <label for=${plant.name}-${plant.id}-planted-date>Planted date:</label>
-            <input type="text" id="${plant.name}-${plant.id}-planted-date" name="${plant.name}-${plant.id}-planted-date" value="${plant.planted_date}"><br>
-            
-            <!-- // SENSOR TYPE -->
-            <label for=${plant.name}-${plant.id}-sensor-type>Sensor type:</label>
-            <input type="text" id="${plant.name}-${plant.id}-sensor-type" name="${plant.name}-${plant.id}-sensor-type" value="${plant.sensor.sensor_type}"><br>
-			
-            <!-- // SENSOR MAC ADDRESS -->
-            <label for=${plant.name}-${plant.id}-mac-address>Sensor MAC address:</label>
-            <input type="text" id="${plant.name}-${plant.id}-mac-address" name="${plant.name}-${plant.id}-mac-address" value="${plant.sensor.mac_address}"><br>
-			
-            <!-- // FARM NAME -->
-            <label for=${plant.name}-${plant.id}-farm-name>Farm name:</label>
-            <input type="text" id="${plant.name}-${plant.id}-farm-name" name="${plant.name}-${plant.id}-farm-name" value="${plant.farm.name}"><br>
-			
-            <!-- // FARM ID - HIDDEN FOR THE MOMENT
-            <label for=${plant.name}-${plant.id}-farm-id>Farm id:</label>
-            <input type="text" id="${plant.name}-${plant.id}-farm-id" name="${plant.name}-${plant.id}-farm-id" value="${plant.farm.id}"><br>
-            -->
-            </fieldset>    
+			let newPlant = new Plant(plant)
+			// debugger
 		
-			<!-- // BUTTONS -->
-            <button id="water-plant-${plant.id}" class="water-button">Water ${titleCase(plant.name)}</button>
-            <button id="edit-plant-${plant.id}" class="edit-plant-button">Edit ${titleCase(plant.name)}</button>
-            <button id="delete-plant-${plant.id}" class="delete-plant-button">Remove ${titleCase(plant.name)}</button>
-			</div>
-			`;
-			
-			document.getElementById('plants-container').innerHTML += plantCard;
+			document.getElementById('plants-container').innerHTML += newPlant.renderPlant();
 			
 			// HELP: can't figure out how to get each WATER and EDIT button to work
 
@@ -107,7 +54,6 @@ function getPlants() {
 			// 	button.addEventListener("click", waterPlant)
 			// })
 
-			
 		})
 		getAllWaterButton()					
 	})
@@ -147,21 +93,10 @@ function waterPlant(e) {
 // 			};
 
 
-
-
-
-
-
-
-
-
 			// function editPlantButton(plant) {
 			// 	console.log(`hello ${plant.name} edit button`);
 
 			// };
-
-
-
 
 
 function getAllEditButton() {
@@ -171,7 +106,6 @@ function getAllEditButton() {
 function getAllDeleteButton() {
 
 }
-
 
 function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {
  
