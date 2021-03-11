@@ -1,10 +1,3 @@
-// Need help with: 
-    // would it make sense to start working on the class now or will that take too long to work on?
-    // get edit, water and delete buttons to work
-    // create a new sensor 
-
-
-
 
 
 

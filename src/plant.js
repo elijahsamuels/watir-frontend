@@ -1,4 +1,4 @@
-// why we want this file: it will allow to know WHICH objects we're clicking on or which instance of the object we're working with.
+// why we want this file/classes: it will allow to know WHICH objects we're clicking on or which instance of the object we're working with.
 
 class Plant {
 	constructor(plant) {
@@ -13,15 +13,37 @@ class Plant {
 		this.farm_id = plant.farm.id;
 		this.farm_name = plant.farm.name;
 		this.sensor_type = plant.sensor[0].sensor_type;
-		this.mac_address = plant.sensor[0].mac_address
-	// Plant.all.push(this);
-	};
+		this.mac_address = plant.sensor[0].mac_address;
 
-	// This renders all plants to the DOM
-	renderPlant() {
-		// debugger
-		return `
-		<div>
+		// HELP: 
+		// I don't know how to pass THIS around?
+		// don't understand how to place an eventlistener for this class. wont work in thet constructor method because the form isn't built yet, so we can't add the eventlistner to something that doesnt exist yet.
+
+		// console.log(this) 
+		// this.waterButton = addEventListener('click')
+		
+        // this.element = document.getElementById(`water-plant-${this.id}`)
+        // this.element.dataset["id"] = id
+        // this.element.id = `item-${id}`
+        
+        // this.element.addEventListener('click', console.log("heloo water button"))
+        // // this.element.addEventListener('click', this.handleLiClick)
+		
+		// this.document.getElementById(`water-plant-${this.id}`)
+		
+		Plant.all.push(this);
+	};
+	
+	// waterButton() {
+		// 	let button = document.getElementById(`water-plant-1`)
+		// 	// let button = document.getElementById(`water-plant-${this.id}`)
+		// 	button.addEventListener("click", console.log("heloo water button"))
+		// }
+		
+		// This renders all plants to the DOM
+		renderPlant() {
+			return `
+			<div>
 			<fieldset disabled>
             <!-- // PLANT NAME -->
             <label for=${this.name}-${this.id}>Plant name:</label>
@@ -50,32 +72,46 @@ class Plant {
             <!-- // PLANTED DATE -->
             <label for=${this.name}-${this.id}-planted-date>Planted date:</label>
             <input type="text" id="${this.name}-${this.id}-planted-date" name="${this.name}-${this.id}-planted-date" value="${this.planted_date}"><br>
-
-				<!-- // SENSOR TYPE -->
-				<label for=${this.name}-${this.id}-sensor-type>Sensor type:</label>
-				<input type="text" id="${this.name}-${this.id}-sensor-type" name="${this.name}-${this.id}-sensor-type" value="${this.sensor_type}"><br>
-				
-				<!-- // SENSOR MAC ADDRESS -->
-				<label for=${this.name}-${this.id}-mac-address>Sensor MAC address:</label>
-				<input type="text" id="${this.name}-${this.id}-mac-address" name="${this.name}-${this.id}-mac-address" value="${this.mac_address}"><br>
-				
-				<!-- // FARM NAME -->
-				<label for=${this.name}-${this.id}-farm-name>Farm name:</label>
-				<input type="text" id="${this.name}-${this.id}-farm-name" name="${this.name}-${this.id}-farm-name" value="${this.farm_name}"><br>
-				
-				<!-- // FARM ID - HIDDEN FOR THE MOMENT 
-				<label for=${this.name}-${this.id}-farm-id>Farm id:</label>
-				<input type="text" id="${this.name}-${this.id}-farm-id" name="${this.name}-${this.id}-farm-id" value="${this.farm_id}"><br>
-				-->
+			
+			<!-- // SENSOR TYPE -->
+			<label for=${this.name}-${this.id}-sensor-type>Sensor type:</label>
+			<input type="text" id="${this.name}-${this.id}-sensor-type" name="${this.name}-${this.id}-sensor-type" value="${this.sensor_type}"><br>
+			
+			<!-- // SENSOR MAC ADDRESS -->
+			<label for=${this.name}-${this.id}-mac-address>Sensor MAC address:</label>
+			<input type="text" id="${this.name}-${this.id}-mac-address" name="${this.name}-${this.id}-mac-address" value="${this.mac_address}"><br>
+			
+			<!-- // FARM NAME -->
+			<label for=${this.name}-${this.id}-farm-name>Farm name:</label>
+			<input type="text" id="${this.name}-${this.id}-farm-name" name="${this.name}-${this.id}-farm-name" value="${this.farm_name}"><br>
+			
+			<!-- // FARM ID - HIDDEN FOR THE MOMENT 
+			<label for=${this.name}-${this.id}-farm-id>Farm id:</label>
+			<input type="text" id="${this.name}-${this.id}-farm-id" name="${this.name}-${this.id}-farm-id" value="${this.farm_id}"><br>
+			-->
             </fieldset>    
-		
+			
 			<!-- // BUTTONS -->
             <button id="water-plant-${this.id}" class="water-button">Water ${titleCase(this.name)}</button>
             <button id="edit-plant-${this.id}" class="edit-plant-button">Edit ${titleCase(this.name)}</button>
             <button id="delete-plant-${this.id}" class="delete-plant-button">Remove ${titleCase(this.name)}</button>
 			</div>
-		`
-	}
+			`
+		}
+		
+
+	// getAllWaterButton() {
+	// 	let allWaterButtons = Array.from(document.getElementsByClassName('water-button'))
+	// 	allWaterButtons.forEach( e => {
+	// 		e.addEventListener("click", waterPlant)
+	// 	})
+	// };
+
+	
+	// waterPlant(e) {
+	// 	e.target.previousElementSibling.children[10].value = Date.now()
+	// }
+	
 
 };
 

@@ -40,13 +40,10 @@ function getPlants() {
 	// .then(handlePlants)
 	.then(plants => {
 		plants.forEach(plant => {
-			
 			let newPlant = new Plant(plant)
-			// debugger
 		
 			document.getElementById('plants-container').innerHTML += newPlant.renderPlant();
 			
-			// HELP: can't figure out how to get each WATER and EDIT button to work
 
 			// let waterButton = Array.from(document.getElementsByClassName("water-button"));
 			// 	waterButton.forEach(div => {
@@ -55,35 +52,58 @@ function getPlants() {
 			// })
 
 		})
-		getAllWaterButton()					
+		getAllWaterButton()
+		getAllEditButton()				
 	})
 }
 
+function currentDateTime() {
+	let datetime = new Date;
+	return datetime.toUTCString();
+}
 
 function getAllWaterButton() {
 	let allWaterButtons = Array.from(document.getElementsByClassName('water-button'))
-	allWaterButtons.forEach( e => {
-		e.addEventListener("click", waterPlant)
-	})
+	allWaterButtons.forEach( e => e.addEventListener("click", waterPlant)
+	)
 }
 
 function waterPlant(e) {
-	e.target.previousElementSibling.children[10].value = Date.now()
+	e.target.previousElementSibling.children[10].value = currentDateTime();
+	let waterAmount = parseInt(e.target.previousElementSibling.children[13].value) 
+	e.target.previousElementSibling.children[13].value = waterAmount + 1
 }
 
+function getAllEditButton() {
+	let allEditButtons = Array.from(document.getElementsByClassName('edit-plant-button'))
+	allEditButtons.forEach( e => e.addEventListener("click", editPlant)
+	)
+}
+
+function editPlant() {
+	if (editPlantButton.innerText === "Edit " + titleCase(plant.name)) {
+		editPlantButton.innerText = "Save " + titleCase(plant.name)
+		// Save edits to the plant
+	} else if (editPlantButton.innerText === "Save " + titleCase(plant.name)){
+		editPlantButton.innerText = "Edit " + titleCase(plant.name)
+	}
+}
+
+function getAllDeleteButton() {
+}
 
 // function getPlants() { 
-// 	fetch(baseURL + plant.id + "/edit")
+// 	fetch(baseURL + plant.id + "/edit")	
 // 	.then(response => response.json())
 // 	// .then(handlePlants)
 // 	.then(plants => {
 // 		plants.forEach(plant => {
-// 			const plantCard = 
+// 			const plantCard = 	
 
 
 // // use this for the response FROM the fetch
 // 			function waterEvent(plant) {
-// 				console.log(`hello button ${plant.name}`);
+// 				console.log(`hello button ${plant.name}`);	
 // 				document.getElementById(`${plant.id}-last-water`).innerText = Date();
 // 				document.querySelector("#\\31  > thead > tr:nth-child(4)").innerText = Date(); // this ONLY works for this specific spot, NOT each value.
 
@@ -94,18 +114,11 @@ function waterPlant(e) {
 
 
 			// function editPlantButton(plant) {
-			// 	console.log(`hello ${plant.name} edit button`);
+			// 	console.log(`hello ${plant.name} edit button`);	
 
 			// };
 
-
-function getAllEditButton() {
-
-}
-
-function getAllDeleteButton() {
-
-}
+			
 
 function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {
  
