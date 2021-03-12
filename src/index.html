@@ -56,25 +56,25 @@
         <h4>Create a plant</h4>
          <form id="plantform">
             <label>Plant Name</label>
-            <input type="text" name="name" id="plant-submit-name">
+            <input type="text" name="name" id="plant-submit-name" required >
             <br>
             <label>Plant height</label>
-            <input type="text" name="plant-height" id="plant-submit-height">
+            <input type="text" name="plant-height" id="plant-submit-height" required >
             <br>
             <label>Plant grow zone</label>
-            <input type="text" name="plant-grow-zone" id="plant-submit-grow-zone">
+            <input type="text" name="plant-grow-zone" id="plant-submit-grow-zone" required >
             <br>
             <label>Notes</label>
-            <textarea name="plant-notes" cols="25" rows="8" id="plant-submit-notes"></textarea>
+            <textarea name="plant-notes" cols="25" rows="8" id="plant-submit-notes" required ></textarea>
             <br>
 
             <label>Planted date</label>
-            <input type="text" name="plant-submit-planted-date" id="plant-submit-planted-date" value=XXX>
+            <input type="date" name="plant-submit-planted-date" id="plant-submit-planted-date" required >
 
             <!-- <label>Last Watered</label> -->
-            <input hidden type="text" name="plant-submit-last-watered" id="plant-submit-last-watered" value="0">
+            <input hidden type="text" name="plant-submit-last-watered" id="plant-submit-last-watered" value="0" required >
             <!-- <label>Last Watered Duration</label> -->
-            <input hidden type="text" name="plant-submit-last-watered-duration" id="plant-submit-last-watered-duration" value=0>
+            <input hidden type="text" name="plant-submit-last-watered-duration" id="plant-submit-last-watered-duration" value=0 required >
             <br>
 
 
@@ -88,7 +88,7 @@
               </select>
             <br>
             <label>Plant sensor mac address</label>
-            <input type="text" name="sensor-mac-address" id="plant-submit-sensor-mac-address">
+            <input type="text" name="sensor-mac-address" id="plant-submit-sensor-mac-address" required >
             <br>
 
             <label>Farm name</label>
@@ -99,7 +99,7 @@
               </select>
             <br>
 
-            <input type="submit" value="Add a Plant" id="plant-submit" class="btn btn-success">
+            <input type="submit" value="Add a Plant" id="plant-submit" class="btn btn-success" >
         </form>
     </div>
 

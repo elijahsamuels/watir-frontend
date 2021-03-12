@@ -61,7 +61,7 @@ class Plant {
 						<input type="text" 
 							id="last-watered-${this.id}" 
 							name="${this.name}-${this.id}-last-watered" 
-							value="${this.last_watered}" 
+							value="${formatDateTime(this.last_watered)}" 
 							disabled="disabled" ><br>
 					
 				<!-- // PLANT LAST WATERED DURATION -->
@@ -88,7 +88,7 @@ class Plant {
 						<input type="text" 
 							id="planted-date-${this.id}" 
 							name="${this.name}-${this.id}-planted-date" 
-							value="${this.planted_date}" 
+							value="${formatDateTime(this.planted_date)}" 
 							disabled="disabled" ><br>
 						
 				<!-- // SENSOR TYPE -->
@@ -155,8 +155,9 @@ class Plant {
 			let plantName = document.getElementById('name-'+plantID).value
 			waterButton.innerText = "Watering " + plantName
 
-			// <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-			// <span class="sr-only">Loading...</span>
+			// <div class="progress">
+			// <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+			// </div>
 
 			let plantWateredDuration = "last-watered-duration-" + plantID
 			let plantNewWaterDuration = parseInt(document.getElementById(plantWateredDuration).value)
@@ -176,6 +177,7 @@ class Plant {
 
 			}, 2000);
 			// add a timer for 10 seconds. this should simulate the pump 
+			// https://getbootstrap.com/docs/4.0/components/progress/
 
 		};
 	
