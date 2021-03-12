@@ -1,0 +1,40 @@
+/* 
+
+get by class: use .
+get by id: use #
+get elements (h1, p, etc...): use NOTHING!
+*/
+
+html, body, #main-container {
+    height: 100%;
+    background-color: #ffffff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 2vh;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: fantasy;
+    text-align: center;
+    margin: 1vh;
+}
+
+.plants-card,
+.plant-submit-form {
+	background-color: #d3ffdb;
+    border-radius: .5rem;
+	/* border-color: #000;
+    border-width:3px !important; */
+    margin: 1vh;
+    text-align: center;
+    max-width: 500px; 
+}
+
+.btn,
+.btn-outline-primary,
+.btn-outline-success,
+.btn-outline-danger,
+#edit-plant-button,
+#delete-plant-button {
+    cursor: pointer;
+    border-radius: .5rem;
+}

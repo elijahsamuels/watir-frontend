@@ -7,14 +7,24 @@
 
 	<title>Document</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+
+    <!-- CSS only -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="custom.css">
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
 	<!--Import materialize.css-->
 	<!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
     <!-- Compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
-
     <!-- Compiled and minified JavaScript -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
-
 	<!--Let browser know website is optimized for mobile-->
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 
@@ -22,13 +32,13 @@
 <body>
 	
     <div>
-        <h3 id="header">Your Garden: listGardenName</h3>
+        <h1 id="header">Your Garden</h1>
     </div>
 
     <div id="plants-container">
 
         <h4>Your Plants</h4>
-        <button>Sort by name</button>needs work
+        <button class="btn btn-outline-secondary ">Sort by name</button> needs work
         <!-- <div id="search-div">
             <input type="text" id="search"> 
             <button id="searchButton">Search By Plant Name</button>
@@ -36,17 +46,11 @@
         <button id="sort-name">Sort by plant names </button> -->
     
         <ul id="plants-list"></ul>
-        <!-- things we want to see:
-        <ul>when it was last watered</ul>
-        <ul>how much it was last watered</ul>
-        <ul>the grow zone</ul>
-        <ul>date planted</ul>
-        <ul>the associated sensor</ul>
-        <ul>the associated sensor mac address</ul> -->
+    
         
     </div>
     
-    <div id="plant-submit-form">
+    <div id="plant-submit-form" class="plant-submit-form">
         <h4>Create a plant</h4>
          <form id="plantform">
             <label>Plant Name</label>
@@ -93,11 +97,12 @@
               </select>
             <br>
 
-            <input type="submit" value="Add a Plant" id="plant-submit">
+            <input type="submit" value="Add a Plant" id="plant-submit" class="btn btn-success">
         </form>
     </div>
 
 
+        <link rel="stylesheet" href="style.css">
 
 
 

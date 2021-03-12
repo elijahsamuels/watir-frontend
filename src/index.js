@@ -17,6 +17,7 @@ const plantSubmit = document.getElementById('plant-submit')
 document.addEventListener('DOMContentLoaded', () => {
 	getPlants()
 	
+	
 	document.getElementById('plant-submit').addEventListener("click", (e) => {
 		console.log("Add plant default prevented!")
 		e.preventDefault()
@@ -55,7 +56,7 @@ function getPlants() {
 
 		})
 		Plant.getAllWaterButton()
-		// getAllEditButton()				
+		Plant.getAllEditButton()				
 	})
 }
 
@@ -68,8 +69,6 @@ function formatDateTime() {
 	let datetime = new Date;
 	return datetime.toUTCString();
 }
-
-
 
 function getAllDeleteButton() {
 }

@@ -18,8 +18,24 @@ class PlantAdapter {
 		})
 	}
 
-
-
+	updatePlant(updatedPlantName, updatedPlantHeight, updatedPlantNotes, updatedPlantLastWatered,updatedPlantLastWateredDuration, updatedPlantGrowZone, updatedPlantPlantedDate, updatedPlantSensorType, updatedPlantMacAddress, updatedPlantFarmName, plantID) {
+		fetch(baseURL + plantID, {
+			method: "PATCH",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				name: updatedPlantName, 
+				height: updatedPlantHeight, 
+				notes: updatedPlantNotes, 
+				last_watered: updatedPlantLastWatered,
+				last_watered_amount: updatedPlantLastWateredDuration, 
+				grow_zone: updatedPlantGrowZone, 
+				planted_date: updatedPlantPlantedDate, 
+				// sensor: updatedPlantSensorType, 
+				// sensor: updatedPlantMacAddress, 
+				// farm_id: updatedPlantFarmName
+			})
+		})
+	}
 
 
 
