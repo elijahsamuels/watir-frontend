@@ -18,12 +18,15 @@ class Plant {
 		Plant.all.push(this);
 	};
 	static all = [];
-		
+		// HELP: can't get these to go into the flexgrid
 		// This renders all plants to the DOM
 		renderPlant() {
 			return `
 			<div class="plants-card">
-				<fieldset class="${this.name}-${this.id}">
+			<div class="container">
+			<div class="row">
+			  <div class="col-md">
+						  <fieldset class="${this.name}-${this.id}">
 
 				<!-- // PLANT NAME -->
 					<label for="${this.name}-${this.id}">Plant name:</label>
@@ -128,7 +131,10 @@ class Plant {
 					<button id="water-plant-${this.id}" data-id="${this.id}" class="water-button btn-outline-primary ">Water ${titleCase(this.name)}</button>
 					<button id="edit-plant-${this.id}" data-id="${this.id}" class="edit-plant-button btn-outline-success ">Edit</button>
 					<button id="delete-plant-${this.id}" data-id="${this.id}" class="delete-plant-button btn-outline-danger ">Remove ${titleCase(this.name)}</button>
-				</fieldset>    
+					</fieldset>    
+					</div>
+				</div>
+				</div>
 			</div>
 			`
 		}
