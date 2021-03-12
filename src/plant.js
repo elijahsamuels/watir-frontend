@@ -145,9 +145,12 @@ class Plant {
 			})
 		};
 
+		// this sends the values and plant ID to the plantAdapter class
 		static waterPlant(e) {
 			let plantID = e.target.dataset.id
-			
+			let waterButton = document.getElementById("water-plant-" + plantID)
+			waterButton.disabled = true
+
 			let plantWateredDuration = "last-watered-duration-" + plantID
 			let plantNewWaterDuration = parseInt(document.getElementById(plantWateredDuration).value)
 			document.getElementById(plantWateredDuration).value = plantNewWaterDuration + 1
@@ -159,11 +162,11 @@ class Plant {
 			
 			plantAdapter.waterPlant(plantNewWaterDate, plantNewWaterDuration, plantID)
 			
-			// e.target.previousElementSibling.children[10].value = currentDateTime();
-			// let waterAmount = parseInt(e.target.previousElementSibling.children[13].value) 
-			// let plantNewWaterDate = e.target.previousElementSibling.children[10].value
-			// let plantNewWaterDuration = e.target.previousElementSibling.children[13].value
-			// // this sends the values and plant ID to the plantAdapter class
+			setTimeout(function () {
+				console.log('helo timer');
+				waterButton.disabled = false
+			}, 10000);
+			// add a timer for 10 seconds. this should simulate the pump 
 
 		};
 	
