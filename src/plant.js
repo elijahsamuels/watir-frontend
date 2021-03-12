@@ -129,6 +129,8 @@ class Plant {
 					
 					<!-- // BUTTONS -->
 					<button id="water-plant-${this.id}" data-id="${this.id}" class="water-button btn-outline-primary ">Water ${titleCase(this.name)}</button>
+				  
+
 					<button id="edit-plant-${this.id}" data-id="${this.id}" class="edit-plant-button btn-outline-success ">Edit</button>
 					<button id="delete-plant-${this.id}" data-id="${this.id}" class="delete-plant-button btn-outline-danger ">Remove ${titleCase(this.name)}</button>
 					</fieldset>    
@@ -150,6 +152,11 @@ class Plant {
 			let plantID = e.target.dataset.id
 			let waterButton = document.getElementById("water-plant-" + plantID)
 			waterButton.disabled = true
+			let plantName = document.getElementById('name-'+plantID).value
+			waterButton.innerText = "Watering " + plantName
+
+			// <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+			// <span class="sr-only">Loading...</span>
 
 			let plantWateredDuration = "last-watered-duration-" + plantID
 			let plantNewWaterDuration = parseInt(document.getElementById(plantWateredDuration).value)
@@ -165,7 +172,9 @@ class Plant {
 			setTimeout(function () {
 				console.log('helo timer');
 				waterButton.disabled = false
-			}, 10000);
+				waterButton.innerText = "Water " + plantName
+
+			}, 2000);
 			// add a timer for 10 seconds. this should simulate the pump 
 
 		};
