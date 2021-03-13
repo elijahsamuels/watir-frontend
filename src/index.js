@@ -3,7 +3,6 @@ const plantsContainer = document.getElementById('plants-container')
 const plantsList = document.getElementById('plants-list')
 const plantAdapter = new PlantAdapter
 
-
 // Plant form fields
 const plantSubmitForm = document.getElementById('plant-submit-form')
 const plantSubmitName = document.getElementById('plant-submit-name')
@@ -18,10 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// prefill calendar for form
 	let defaultCalendarDate = document.getElementById('plant-submit-planted-date')
-	defaultCalendarDate.value = currentDateTime()
+	// defaultCalendarDate.value = currentDateTime()
 
 	getPlants()
-	
 	
 	document.getElementById('plant-submit').addEventListener("click", (e) => {
 		console.log("Add plant default prevented!")
@@ -39,29 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		postFetch(plantSubmitForm, plantSubmitName, plantSubmitHeight, plantSubmitGrowZone, plantSubmitNotes, plantSubmitSensor, plantSubmitSenorMacAddress, plantSubmitFarmID)
 	
 	}, false);
-	
 })
 
 function getPlants() { 
 	fetch(baseURL)
 	.then(response => response.json())
-	// .then(handlePlants)
 	.then(plants => {
 		plants.forEach(plant => {
 			let newPlant = new Plant(plant)
-		
 			document.getElementById('plants-container').innerHTML += newPlant.renderPlant();
-			
-
-			// let waterButton = Array.from(document.getElementsByClassName("water-button"));
-			// 	waterButton.forEach(div => {
-			// 	let button = div.querySelector("button")
-			// 	button.addEventListener("click", waterPlant)
-			// })
-
 		})
 		Plant.getAllWaterButton()
-		Plant.getAllEditButton()				
+		Plant.getAllEditButton()	
+		Plant.sortButton()	
 	})
 }
 
@@ -69,15 +57,15 @@ function currentDateTime() {
 	let datetime = new Date;
 	return datetime.toUTCString();
 }
-
-function formatDateTime() {
-	let time = new Date().toLocaleTimeString("en-US")
-	let date = new Date().toLocaleDateString("en-US")
+ 
+function newDateTime() {
+	let time = new Date().toLocaleString("en-US")
+	let date = new Date().toLocaleString("en-US")
 	
 	return date + ' ' + time;
 }
 
-function formatDate() {
+function newDate() {
 	let date = new Date().toLocaleDateString("en-US")
 	return date;
 }
@@ -93,18 +81,9 @@ function getAllDeleteButton() {
 // 		plants.forEach(plant => {
 // 			const plantCard = 	
 
-
-// // use this for the response FROM the fetch
-// 			function waterEvent(plant) {
-// 				console.log(`hello button ${plant.name}`);	
-// 				document.getElementById(`${plant.id}-last-water`).innerText = Date();
-// 				document.querySelector("#\\31  > thead > tr:nth-child(4)").innerText = Date(); // this ONLY works for this specific spot, NOT each value.
-
 // 			// increment plant.last_watered
 // 			// send GPIO.
 // 			};
-
-			
 
 function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {
  
@@ -139,3 +118,13 @@ function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, pl
 function titleCase(str) {
 	return str.toLowerCase().split(' ').map((word) => word.replace(word[0], word[0].toUpperCase())).join(' ');
 	}
+
+document.getElementsByClassName('plants-card').onmousemove = (e) => {
+
+	const x = e.pageX - e.target.offsetLeft
+	const y = e.pageY - e.target.offsetTop
+
+	e.target.style.setProperty('--x', `${ x }px`)
+	e.target.style.setProperty('--y', `${ y }px`)
+	
+}

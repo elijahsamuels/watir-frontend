@@ -1,4 +1,7 @@
 
+removeChild(document.getElementsByClassName('plants-list'));
+
+
 
 
 

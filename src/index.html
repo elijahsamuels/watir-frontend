@@ -29,30 +29,47 @@
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 
 </head>
+
 <body>
 	
-    <div>
-        <h1 id="header">Your Garden</h1>
-    </div>
-
-    <div id="plants-container">
-
-        <h4>Your Plants</h4>
-        <button class="btn btn-outline-secondary ">Sort by name</button> needs work
-        <!-- <div id="search-div">
-            <input type="text" id="search"> 
-            <button id="searchButton">Search By Plant Name</button>
-        </div>
-        <button id="sort-name">Sort by plant names </button> -->
+    <div class="header" id="myHeader">
+            <h1>Your Garden</h1>
+            <h4>Your Plants</h4>
+            <div>    
+                <button class="btn btn-outline-secondary" id="plant-sort-button">Sort by name</button>
+            </div>
+    </div>      
     
-        <div id="plants-list" class="plants-list"></div>
-
-    
+    <script>
+        window.onscroll = function() {myHeaderFunction()};
         
+        let header = document.getElementById("myHeader");
+        let sticky = header.offsetTop;
+        
+        function myHeaderFunction() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
+    </script>
+        
+  
+    <!-- <div id="search-div">
+        <input type="text" id="search"> 
+        <button id="searchButton">Search By Plant Name</button>
+    </div>
+    <button id="sort-name">Sort by plant names </button> -->
+    
+    <div id="plants-container">
+        <div id="plants-list" class="plants-list"></div>
+            <!-- all plants get rendered in here -->       
         </div>
     </div>
     
     <div id="plant-submit-form" class="plant-submit-form">
+        <div class="gradient-border" id="box">
         <h4>Create a plant</h4>
          <form id="plantform">
             <label>Plant Name</label>
@@ -101,14 +118,22 @@
 
             <input type="submit" value="Add a Plant" id="plant-submit" class="btn btn-success" >
         </form>
+        </div>
     </div>
 
 
-        <!-- <link rel="stylesheet" href="style.css"> -->
 
 
 
- 	<!-- Javascript Frontend files -->
+    <div>
+        <div class="footer" id="myFooter">
+            <h5>Created by Elijah Samuels</h5>
+    </div>      
+    
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <!-- Javascript Frontend files -->
      <script type="text/javascript" src="plantAdapter.js"></script>
      <script type="text/javascript" src="plant.js"></script>
 	<script type="text/javascript" src="index.js"></script>

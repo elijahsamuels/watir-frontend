@@ -5,28 +5,20 @@ get by id: use #
 get elements (h1, p, etc...): use NOTHING!
 */
 
-html, body, #main-container {
+html, body {
     height: 100%;
     background-color: #ffffff;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin: 2vh;
+    text-align: right;
+    /* scroll-behavior: smooth; */
+
+
 }
 
 h1, h2, h3, h4, h5 {
     font-family: fantasy;
     text-align: center;
     margin: 1vh;
-}
-
-.plants-card,
-.plant-submit-form {
-	background-color: #d3ffdb;
-    border-radius: .5rem;
-	/* border-color: #000;
-    border-width:3px !important; */
-    margin: 1vh;
-    text-align: center;
-    max-width: 500px; 
 }
 
 .btn,
@@ -38,11 +30,68 @@ h1, h2, h3, h4, h5 {
     cursor: pointer;
     border-radius: .5rem;
 }
+/* .plants-card, */
+.plant-submit-form,
+div.row {
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(99,203,93,1) 100%);
+    border-width: 1px;
+    border-color: black;
+    border-style: inset;
+    text-align: center;
+    border-radius: .5rem;
+    /* border-color: #000;
+    border-width:3px !important; */
+    margin: 1vh;
+    /* max-width: 500px;  */
+
+}
 /* 
 .plants-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     
-  } */
+} */
+
+#plants-container,
+.plants-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+
+/* Style the header */
+.header {
+    padding: 10px 16px;
+    background: #02f12e;
+    color: black;
+    /* position: fixed;
+    margin-bottom: 30px;
+    width: 100% */
+    display: flex;
+
+}
   
+  /* Page content */
+  .content {
+    padding: 1px;
+    
+  }
+  
+  /* The sticky class is added to the header with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 102px;
+  }
+  
+
+
