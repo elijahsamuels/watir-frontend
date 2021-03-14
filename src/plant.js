@@ -130,7 +130,11 @@ class Plant {
 				
 				<!-- // BUTTONS -->
 				<div class="buttons-container">
-					<button id="water-plant-${this.id}" data-id="${this.id}" class="water-button btn-outline-primary ">Water ${titleCase(this.name)}</button>		
+				<div class="progress-bar${this.id}" style="--width: 10" data-label="Loading..."></div>
+
+					<div class="progress-bar" style="--width: 10" data-label="loading...">
+					</div>	
+						<button id="water-plant-${this.id}" data-id="${this.id}" class="water-button btn-outline-primary ">Water ${titleCase(this.name)}</button>		
 
 					<button id="edit-plant-${this.id}" data-id="${this.id}" class="edit-plant-button btn-outline-success ">Edit</button>
 					<button id="delete-plant-${this.id}" data-id="${this.id}" class="delete-plant-button btn-outline-danger ">Remove ${titleCase(this.name)}</button>
@@ -189,10 +193,27 @@ class Plant {
 		let plantName = document.getElementById('name-'+plantID).value
 		waterButton.innerText = "Watering " + plantName
 			
+		const progressBar = document.getElementsByClassName('progress-bar'+plantID)[0]
+		setInterval(() => {
+		  const computedStyle = getComputedStyle(progressBar)
+		  const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
+		  progressBar.style.setProperty('--width', width + .2)
+		}, 5)
+		
+
+
 			// this is where we're going to update the water button to a progress bar incrementing a percentage per second
 			// <div class="progress">
 			// <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 			// </div>
+
+
+			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 20%;" aria-color="white" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">5 seconds</div>`
+			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">4 seconds</div>`
+			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">3 seconds</div>`
+			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">2 seconds</div>`
+			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">1 second</div>`
+
 
 		let plantWateredDuration = "last-watered-duration-" + plantID
 		let plantNewWaterDuration = parseInt(document.getElementById(plantWateredDuration).value)

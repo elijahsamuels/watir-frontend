@@ -96,3 +96,29 @@ div.row {
 .sticky + .content {
   padding-top: 102px;
 }
+
+
+
+
+.progress-bar {
+  position: relative;
+  background-color: brown;
+  border-radius: .5rem;
+  color: white;
+  height: 2em;
+  width: 20rem;
+
+  
+}
+
+.progress-bar::before {
+  content: attr(data-label);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  min-width: calc(var(--width, 0) * 1%);
+  max-width: calc(100% - 1em);
+  background-color: blue;
+  border-radius: .5rem;
+  padding: 1em;
+}

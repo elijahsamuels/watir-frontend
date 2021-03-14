@@ -141,3 +141,11 @@ document.getElementsByClassName('plants-card').onmousemove = (e) => {
 	e.target.style.setProperty('--y', `${ y }px`)
 	
 }
+
+
+// const progressBar = document.getElementsByClassName('progress-bar')[0]
+// setInterval(() => {
+//   const computedStyle = getComputedStyle(progressBar)
+//   const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
+//   progressBar.style.setProperty('--width', width + .2)
+// }, 5)
