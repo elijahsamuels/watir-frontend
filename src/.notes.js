@@ -1,3 +1,36 @@
+static sortAllPlants() {
+    let allPlants = Plant.all
+    let sortedPlantsAscend = allPlants.sort((a,b) => (a.name > b.name) ? 1 :-1)
+    let sortedPlantsDescend = allPlants.sort((a,b) => (a.name < b.name) ? 1 :-1)
+    let plantsContainer	= document.getElementById('plants-container')
+    let sortBtn = document.getElementById('plant-sort-button')
+    // document.getElementById('plants-container').innerHTML = ""
+
+    if (sortBtn.innerHTML = "Sort Plants &#8593;") {
+        plantsContainer.innerHTML = ""
+        sortBtn.innerHTML = "Sort Plants &#8595;" // down arrow
+        sortedPlantsAscend.forEach(element => {
+            document.getElementById('plants-container').innerHTML += element.renderPlant();
+    } else {
+        plantsContainer.innerHTML = ""
+        sortBtn.innerHTML = "Sort Plants &#8593;" // up arrow
+        sortedPlantsDescend.forEach(element => {
+            document.getElementById('plants-container').innerHTML += element.renderPlant();
+    })
+        
+    }; 
+
+
+    Sort Plants ↓
+
+    Sort Plants ↑
+
+
+
+
+
+
+
 
 removeChild(document.getElementsByClassName('plants-list'));
 

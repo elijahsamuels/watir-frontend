@@ -147,21 +147,32 @@ class Plant {
 		let sortBtn = document.getElementById('plant-sort-button').addEventListener('click', this.sortAllPlants)
 
 	};
-	
+	// had to put the sort variables INSIDE each sorting direction. Why?
 	static sortAllPlants() {
 		let allPlants = Plant.all
-		let sortedPlants = allPlants.sort((a,b) => (a.name > b.name) ? 1 :-1)
-			// clear the DOM
-		document.getElementById('plants-container').innerHTML = ""
-
-		sortedPlants.forEach(element => {
-			document.getElementById('plants-container').innerHTML += element.renderPlant();
+		let plantsContainer	= document.getElementById('plants-container')
+		let sortBtn = document.getElementById('plant-sort-button')
+		
+		if (sortBtn.innerHTML === "Sort Plants ↑") {
+			let sortedPlantsAscend = allPlants.sort((a,b) => (a.name > b.name) ? 1 :-1);
+			sortBtn.innerHTML = "Sort Plants ↓";
+			plantsContainer.innerHTML = "";
+			sortedPlantsAscend.forEach(element => {
+				document.getElementById('plants-container').innerHTML += element.renderPlant();
+			}); 
+			Plant.getAllWaterButton();
+			Plant.getAllEditButton();	
 			
-		}); 
-
-		Plant.getAllWaterButton()
-		Plant.getAllEditButton()	
-
+		} else {
+			sortBtn.innerHTML = "Sort Plants ↑";
+			let sortedPlantsDescend = allPlants.sort((a,b) => (a.name < b.name) ? 1 :-1);
+			plantsContainer.innerHTML = "";
+			sortedPlantsDescend.forEach(element => {
+				document.getElementById('plants-container').innerHTML += element.renderPlant();
+			}); 
+			Plant.getAllWaterButton();
+			Plant.getAllEditButton();	
+		}
 	};
 
 	static getAllWaterButton() {

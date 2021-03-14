@@ -15,6 +15,19 @@ const plantSubmit = document.getElementById('plant-submit')
 
 document.addEventListener('DOMContentLoaded', () => {
 
+	    window.onscroll = function() {myHeaderFunction()};
+        
+        let header = document.getElementById("myHeader");
+        let sticky = header.offsetTop;
+        
+        function myHeaderFunction() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
+
 	// prefill calendar for form
 	let defaultCalendarDate = document.getElementById('plant-submit-planted-date')
 	// defaultCalendarDate.value = currentDateTime()
