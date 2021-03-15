@@ -9,6 +9,7 @@ const plantSubmitName = document.getElementById('plant-submit-name')
 const plantSubmitHeight = document.getElementById('plant-submit-height')
 const plantSubmitGrowZone = document.getElementById('plant-submit-grow-zone')
 const plantSubmitNotes = document.getElementById('plant-submit-notes')
+const defaultCalendarDate = document.getElementById('plant-submit-planted-date')
 const plantSubmitSensor = document.getElementById('plant-submit-sensor')
 const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-mac-address')
 const plantSubmit = document.getElementById('plant-submit')
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 	// prefill calendar for form
-	let defaultCalendarDate = document.getElementById('plant-submit-planted-date')
+	// let defaultCalendarDate = document.getElementById('plant-submit-planted-date')
 	// defaultCalendarDate.value = currentDateTime()
 
 	getPlants()
@@ -118,11 +119,27 @@ function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, pl
 	})
 	.then(response => response.json())
 	.then(plant => {
-	  console.log(plant);
-	//   const plantData = plant.data
-	//   // render JSON response
-	//   let newPlant = new Plant(plantData, plantData.attributes)
-	//   document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
+	  console.log("we've added a new plant");  
+	  //   const plantData = plant.data
+	  //   // render JSON response
+	  //   let newPlant = new Plant(plantData, plantData.attributes)
+	    // document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
+		console.log("we've added a new plant");
+		// let allPlants = Plant.all
+		// let plantsContainer = document.getElementById('plants-container')
+		plantsContainer.innerHTML = "";
+	// 	allPlants.forEach(element => {
+	// 		document.getElementById('plants-container').innerHTML += element.renderPlant();
+	// });
+
+	plantSubmitName.value = ""
+	plantSubmitHeight.value = ""
+	plantSubmitGrowZone.value = ""
+	plantSubmitNotes.value = ""
+	plantSubmitSenorMacAddress.value = ""
+	defaultCalendarDate.value = ""
+	
+	getPlants()
 	})
   
 }

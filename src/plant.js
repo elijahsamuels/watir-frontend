@@ -191,9 +191,11 @@ class Plant {
 		let waterButton = document.getElementById("water-plant-" + plantID)
 		waterButton.disabled = true
 		let plantName = document.getElementById('name-'+plantID).value
-		waterButton.innerText = "Watering " + plantName
-			
+		// waterButton.innerText = "Watering " + plantName
+		waterButton.innerHTML = `
+		`
 		const progressBar = document.getElementsByClassName('progress-bar'+plantID)[0]
+		
 		setInterval(() => {
 		  const computedStyle = getComputedStyle(progressBar)
 		  const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
@@ -206,7 +208,6 @@ class Plant {
 			// <div class="progress">
 			// <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 			// </div>
-
 
 			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 20%;" aria-color="white" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">5 seconds</div>`
 			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">4 seconds</div>`
