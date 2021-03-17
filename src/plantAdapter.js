@@ -41,8 +41,6 @@ class PlantAdapter {
 			// .catch(error => console.log(error.message))
 			// .then(object => updatePlantAll())
 		
-
-		
 		// fetch(baseURL + plantID, {
 		// 	method: "PATCH",
 		// 	headers: {"Content-Type": "application/json"},
@@ -59,8 +57,6 @@ class PlantAdapter {
 		// 		// farm_id: updatedPlantFarmName
 		// 		})
 		// 	})
-
-
 
 	}
 

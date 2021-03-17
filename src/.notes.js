@@ -1,6 +1,31 @@
+// function declaration/statement
+function nameOfFunction() {
+    somethingToDo;
+}
 
+// function expression
+let nameOfFunction = function() {
+    somethingToDo;
+}
+// arrow function
+let nameOfFunction = () => {
+    somethingToDo;
+}
 
+// let v var v const 
+/*
+All are hoisted to the top of their scope
 
+var declarations: 
+    globally scoped or function scoped
+    can be updated and re-declared within its scope
+
+let: block scoped
+    can be updated but not re-declared
+
+const: block scoped
+    can neither be updated nor re-declared
+*/
 
 // auto filter/search
 

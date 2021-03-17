@@ -123,7 +123,7 @@ function postFetch(plant_submit_name, plant_submit_height, plant_submit_grow_zon
 	})
 }
 
-
+// future notes to try and make a progress bar 'fill up'
 // document.getElementsByClassName('plants-card').onmousemove = (e) => {
 
 // 	const x = e.pageX - e.target.offsetLeft

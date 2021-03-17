@@ -114,10 +114,10 @@ class Plant {
 				
 			<!-- // FARM NAME -->
 			
-				<label for="${this.id}-farm-name">Farm name: <span value="${this.farm_id}" id="farm-name-label-${this.id}">${this.farm_name}</span></label>
+				<label for="${this.id}-farm-name">Farm name: </label>
 						<select name="plant-submit-farm-name" id="farm-name-${this.id}" disabled="disabled" >
 
-							<option id="selected-${this.id}" selected value="${this.farm_id} " name="${this.name}-${this.id}-farm-name">${this.farm_name}</option>
+							<option id="selected-${this.id}" name="${this.name}-${this.id}-farm-name">${this.farm_name}</option>
 							<option id="0" value="" disabled></option>
 							<option id="1" value="1" name="${this.name}-${this.id}-farm-name">Home</option>
 							<option id="2" value="2" name="${this.name}-${this.id}-farm-name">Backyard</option>
@@ -153,68 +153,6 @@ class Plant {
 		</div>
 		`
 	}
-	/*
-		function filterSearch() {
-			var input, filter, ul, li, a, i, txtValue;
-			input = document.getElementById("myInput");
-			filter = input.value.toUpperCase();
-
-			ul = document.getElementById("myUL");
-			li = ul.getElementsByTagName("li");
-
-			for (i = 0; i < li.length; i++) {
-				a = li[i].getElementsByTagName("a")[0];
-				txtValue = a.textContent || a.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					li[i].style.display = "";
-				} else {
-					li[i].style.display = "none";
-				}
-			}
-		}
-	*/
-
-	// let allEditButtons = Array.from(document.getElementsByClassName('edit-plant-button'))
-	// allEditButtons.forEach( e => {e.addEventListener("click", Plant.editPlant)
-	// })
-
-
-	// static editPlant(e) {
-	// 	let plantID = e.target.dataset.id
-	// 	if (e.target.innerText === "Edit"){
-	// 		e.target.innerText = "Save";
-
-
-
-	// static filterSearchField() {
-	// 	let input = document.getElementById('myInput').addEventListener('keyup', this.filterSearch)
-	// 	// Plant.all.forEach( e => {e, filterSearch(e)})
-	// };
-
-	// // function filterSearch(e) {
-	// // 	console.log(` ${e.code}`)
-	// //   };
-	  
-	// static filterSearch(e) {
-	// 	let plantID = e.target.dataset.id
-
-	// 	let allPlants = document.getElementsByClassName('plant-name') //.value
-	// 	let plantCard = document.getElementById('plants-card-'+this.id) 
-	// 	let input = document.getElementById("myInput");
-	// 	let filter = input.value.toUpperCase();
-	// 	let i = 0;
-
-	// 	for (i = 0; i < allPlants.length; i++) {
-	// 		let a = allPlants[i].value;
-	// 		if (a.toUpperCase().indexOf(filter) > -1) {
-	// 			plantCard.innerHTML = "";
-	// 		} else {
-	// 			allPlants[i].style.display = "none";
-	// 		}
-	// 	}
-	// }
-
-
 
 	static sortButton() {
 		let sortBtn = document.getElementById('plant-sort-button').addEventListener('click', this.sortAllPlants)
@@ -231,7 +169,6 @@ class Plant {
 		if (sortBtn.innerHTML === "Sort Plants ↑") {
 			let sortedPlantsAscend = allPlants.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
 			sortBtn.innerHTML = "Sort Plants ↓";
-			// plantsContainer.innerHTML = "";
 			sortedPlantsAscend.forEach(element => {
 				document.getElementById('plants-container').innerHTML += element.renderPlant();
 			}); 
@@ -316,9 +253,7 @@ class Plant {
 
 		const farmName = document.getElementById("selected-"+plantObj.id)
 		const spanName = document.querySelector("#farm-name-label-"+plantObj.id)
-		spanName.innerHTML = farmName.innerText
 
-		// oldPlant.id = plantObj.id;
 		oldPlant.name = plantObj.name;
 		oldPlant.height = plantObj.height;
 		oldPlant.notes = plantObj.notes;
@@ -326,10 +261,8 @@ class Plant {
 		oldPlant.last_watered_amount = plantObj.last_watered_amount;
 		oldPlant.grow_zone = plantObj.grow_zone;
 		oldPlant.planted_date = plantObj.planted_date;
-		oldFarmID.selectedIndex = plantObj.farm_id+1;
-		// farmNameSpan.value = plantObj.farm_id+1
+		oldPlant.farm_name = plantObj.farm.name;
 	}
-
 				// document.getElementById('farm-name-5').selectedIndex = 4
 
 				// oldPlant.farm_name = plantObj.farm.name; // this works
@@ -393,10 +326,10 @@ class Plant {
 			let updatedPlantPlantedDate = document.getElementById("planted-date-" + plantID).value
 			let updatedPlantSensorType = document.getElementById("sensor-type-" + plantID).value
 			let updatedPlantMacAddress = document.getElementById("mac-address-" + plantID).value
-			// let updatedPlantFarmID = document.getElementById("farm-name-" + plantID).selectedIndex - 1
-			let updatedPlantFarmID = document.getElementById('farm-name-label-'+ plantID).value
-
-		plantAdapter.updatePlant(updatedPlantName, updatedPlantHeight, updatedPlantNotes, updatedPlantLastWatered,updatedPlantLastWateredDuration, updatedPlantGrowZone, updatedPlantPlantedDate, updatedPlantSensorType, updatedPlantMacAddress, updatedPlantFarmID, plantID)
+			let updatedPlantFarmID = document.getElementById('farm-name-' + plantID).value
+			document.getElementById('farm-name-' + plantID).selectedIndex = parseInt(updatedPlantFarmID)+1
+			
+			plantAdapter.updatePlant(updatedPlantName, updatedPlantHeight, updatedPlantNotes, updatedPlantLastWatered,updatedPlantLastWateredDuration, updatedPlantGrowZone, updatedPlantPlantedDate, updatedPlantSensorType, updatedPlantMacAddress, updatedPlantFarmID, plantID)
 
 		}
 	}
@@ -405,7 +338,6 @@ class Plant {
 	static getAllDeleteButton() {
 		let allDeleteButtons = Array.from(document.getElementsByClassName('delete-plant-button'))
 		allDeleteButtons.forEach( e => {e.addEventListener("click", Plant.deletePlant)
-		// console.log(e)
 		})
 	}	
 
