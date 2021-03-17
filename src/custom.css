@@ -45,6 +45,12 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
   border-radius: .5rem;
 }
+
+#plant-sort-button {
+  position: flex;
+
+}
+
 /* .plants-card, */
 .plant-submit-form,
 div.row {

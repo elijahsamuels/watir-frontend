@@ -16,39 +16,40 @@ const plantSubmit = document.getElementById('plant-submit')
 
 document.addEventListener('DOMContentLoaded', () => {
 
-	    window.onscroll = function() {myHeaderFunction()};
+	getPlants();
+
+	// window.onscroll = function() {myHeaderFunction()};
         
-        let header = document.getElementById("myHeader");
-        let sticky = header.offsetTop;
+        // let header = document.getElementById("myHeader");
+        // let sticky = header.offsetTop;
         
-        function myHeaderFunction() {
-          if (window.pageYOffset > sticky) {
-            header.classList.add("sticky");
-          } else {
-            header.classList.remove("sticky");
-          }
-        }
+        // function myHeaderFunction() {
+        //   if (window.pageYOffset > sticky) {
+        //     header.classList.add("sticky");
+        //   } else {
+        //     header.classList.remove("sticky");
+        //   }
+        // }
 
 	// prefill calendar for form
 	// let defaultCalendarDate = document.getElementById('plant-submit-planted-date')
 	// defaultCalendarDate.value = currentDateTime()
 
-	getPlants()
 	
 	document.getElementById('plant-submit').addEventListener("click", (e) => {
-		console.log("Add plant default prevented!")
+		console.log("Added new plant with params ")
 		e.preventDefault()
 		
 		const plantSubmitName = document.getElementById('plant-submit-name').value
-		const plantSubmitHeight = document.getElementById('plant-submit-height').value
-		const plantSubmitGrowZone = document.getElementById('plant-submit-grow-zone').value
-		const plantSubmitNotes = document.getElementById('plant-submit-notes').value
+		const plantSubmitHeight = document.getElementById('plant-submit-height').value || 0
+		const plantSubmitGrowZone = document.getElementById('plant-submit-grow-zone').value || 0
+		const plantSubmitNotes = document.getElementById('plant-submit-notes').value || "Notes"
 		const plantSubmitSensor = document.getElementById('plant-submit-sensor').value
 		const plantSubmitSenorMacAddress = document.getElementById('plant-submit-sensor-mac-address').value
-		const plantSubmitFarmID = document.getElementById('plant-submit-farm-name').value
+		const plantSubmitFarmID = document.querySelector("#plant-submit-farm-name").selectedIndex + 1
 
 		const plantSubmit = document.getElementById('plant-submit')
-		postFetch(plantSubmitForm, plantSubmitName, plantSubmitHeight, plantSubmitGrowZone, plantSubmitNotes, plantSubmitSensor, plantSubmitSenorMacAddress, plantSubmitFarmID)
+		postFetch(plantSubmitName, plantSubmitHeight, plantSubmitGrowZone, plantSubmitNotes, plantSubmitSensor, plantSubmitSenorMacAddress, plantSubmitFarmID)
 	
 	}, false);
 })
@@ -61,8 +62,10 @@ function getPlants() {
 			let newPlant = new Plant(plant)
 			document.getElementById('plants-container').innerHTML += newPlant.renderPlant();
 		})
+		// adding the addEventListener for the buttons
 		Plant.getAllWaterButton()
 		Plant.getAllEditButton()	
+		Plant.getAllDeleteButton()	
 		Plant.sortButton()	
 	})
 }
@@ -75,7 +78,6 @@ function currentDateTime() {
 function newDateTime() {
 	let time = new Date().toLocaleString("en-US")
 	let date = new Date().toLocaleString("en-US")
-	
 	return date + ' ' + time;
 }
 
@@ -84,80 +86,53 @@ function newDate() {
 	return date;
 }
 
-function getAllDeleteButton() {
-}
-
-// function getPlants() { 
-// 	fetch(baseURL + plant.id + "/edit")	
-// 	.then(response => response.json())
-// 	// .then(handlePlants)
-// 	.then(plants => {
-// 		plants.forEach(plant => {
-// 			const plantCard = 	
-
-// 			// increment plant.last_watered
-// 			// send GPIO.
-// 			};
-
-function postFetch(plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {
- 
-	// const bodyData = {plant_submit_form, plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address}
-
-	fetch(baseURL, {
-	  // POST request
-	  method: "POST",
-	  headers: {"Content-Type": "application/json"},
-	  body: JSON.stringify({
-		name: plant_submit_name,
-		height: plant_submit_height,
-		grow_zone: plant_submit_grow_zone,
-		notes: plant_submit_notes,
-		sensor: plant_submit_sensor,
-		sensor_mac_address: plant_submit_senor_mac_address,
-		farm_id: farm_id
-	  })
-	})
-	.then(response => response.json())
-	.then(plant => {
-	  console.log("we've added a new plant");  
-	  //   const plantData = plant.data
-	  //   // render JSON response
-	  //   let newPlant = new Plant(plantData, plantData.attributes)
-	    // document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
-		console.log("we've added a new plant");
-		// let allPlants = Plant.all
-		// let plantsContainer = document.getElementById('plants-container')
-		plantsContainer.innerHTML = "";
-	// 	allPlants.forEach(element => {
-	// 		document.getElementById('plants-container').innerHTML += element.renderPlant();
-	// });
-
-	plantSubmitName.value = ""
-	plantSubmitHeight.value = ""
-	plantSubmitGrowZone.value = ""
-	plantSubmitNotes.value = ""
-	plantSubmitSenorMacAddress.value = ""
-	defaultCalendarDate.value = ""
-	
-	getPlants()
-	})
-  
-}
-
 // simple title casing for a string
 function titleCase(str) {
 	return str.toLowerCase().split(' ').map((word) => word.replace(word[0], word[0].toUpperCase())).join(' ');
 	}
 
-document.getElementsByClassName('plants-card').onmousemove = (e) => {
 
-	const x = e.pageX - e.target.offsetLeft
-	const y = e.pageY - e.target.offsetTop
-
-	e.target.style.setProperty('--x', `${ x }px`)
-	e.target.style.setProperty('--y', `${ y }px`)
-	
+// should move this over to the Plant class
+function postFetch(plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {
+	fetch(baseURL, {
+	  // POST request
+		method: "POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify({
+			name: plant_submit_name,
+			height: plant_submit_height,
+			grow_zone: plant_submit_grow_zone,
+			notes: plant_submit_notes,
+			sensor: plant_submit_sensor,
+			sensor_mac_address: plant_submit_senor_mac_address,
+			farm_id: farm_id
+		})
+	})
+	.then(response => response.json())
+	.then(plant => {
+		console.log("we've submitted a new plant"); 
+		// this is to clear the new plant form 
+		plantsContainer.innerHTML = "";
+		plantSubmitName.value = ""
+		plantSubmitHeight.value = ""
+		plantSubmitGrowZone.value = ""
+		plantSubmitNotes.value = ""
+		plantSubmitSenorMacAddress.value = ""
+		defaultCalendarDate.value = ""	
+		Plant.all = new Array
+		getPlants()
+	})
 }
+
+
+// document.getElementsByClassName('plants-card').onmousemove = (e) => {
+
+// 	const x = e.pageX - e.target.offsetLeft
+// 	const y = e.pageY - e.target.offsetTop
+// 	e.target.style.setProperty('--x', `${ x }px`)
+// 	e.target.style.setProperty('--y', `${ y }px`)
+	
+// }
 
 
 // const progressBar = document.getElementsByClassName('progress-bar')[0]

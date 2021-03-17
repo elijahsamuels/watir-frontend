@@ -1,3 +1,7 @@
+document.body.backgroundColor = "black"
+document.body.backgroundColor = "black"
+
+
 static sortAllPlants() {
     let allPlants = Plant.all
     let sortedPlantsAscend = allPlants.sort((a,b) => (a.name > b.name) ? 1 :-1)

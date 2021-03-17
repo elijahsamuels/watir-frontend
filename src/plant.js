@@ -16,13 +16,15 @@ class Plant {
 		this.mac_address = plant.sensor[0].mac_address;
 		
 		Plant.all.push(this);
+		
 	};
+
 	static all = [];
-		// HELP: can't get these to go into the flexgrid
+
 		// This renders all plants to the DOM
 	renderPlant() {
 		return `
-		<div class="plants-card">
+		<div class="plants-card" id="plants-card-${this.id}">
 		<div class="container">
 		<div class="row">
 			<div class="col-md">
@@ -111,14 +113,17 @@ class Plant {
 						disabled="disabled" ><br>
 				
 			<!-- // FARM NAME -->
-				<label for="${this.name}-${this.id}-farm-name">Farm name:</label>
-				
-					<input type="text" 
-						id="farm-name-${this.id}" 
-						name="${this.name}-${this.id}-farm-name" 
-						value="${this.farm_name}" 
-						disabled="disabled" ><br>
-					
+			
+				<label for="${this.id}-farm-name">Farm name: <span value="${this.farm_id}" id="farm-name-label-${this.id}">${this.farm_name}</span></label>
+						<select name="plant-submit-farm-name" id="farm-name-${this.id}" disabled="disabled" >
+
+							<option id="selected-${this.id}" selected value="${this.farm_id} " name="${this.name}-${this.id}-farm-name">${this.farm_name}</option>
+							<option id="0" value="" disabled></option>
+							<option id="1" value="1" name="${this.name}-${this.id}-farm-name">Home</option>
+							<option id="2" value="2" name="${this.name}-${this.id}-farm-name">Backyard</option>
+							<option id="3" value="3" name="${this.name}-${this.id}-farm-name">Frontyard</option>
+						  </select>
+			
 			<!-- // FARM ID - HIDDEN FOR THE MOMENT 
 				<label for="${this.name}-${this.id}-farm-id">Farm id:</label>
 				
@@ -130,10 +135,12 @@ class Plant {
 				
 				<!-- // BUTTONS -->
 				<div class="buttons-container">
+				
 				<div class="progress-bar${this.id}" style="--width: 10" data-label="Loading..."></div>
-
+				<!-- 
 					<div class="progress-bar" style="--width: 10" data-label="loading...">
 					</div>	
+				-->
 						<button id="water-plant-${this.id}" data-id="${this.id}" class="water-button btn-outline-primary ">Water ${titleCase(this.name)}</button>		
 
 					<button id="edit-plant-${this.id}" data-id="${this.id}" class="edit-plant-button btn-outline-success ">Edit</button>
@@ -149,34 +156,35 @@ class Plant {
 		
 	static sortButton() {
 		let sortBtn = document.getElementById('plant-sort-button').addEventListener('click', this.sortAllPlants)
-
 	};
-	// had to put the sort variables INSIDE each sorting direction. Why?
+
 	static sortAllPlants() {
-		let allPlants = Plant.all
+		// need to get new instance of the database
 		let plantsContainer	= document.getElementById('plants-container')
+
+		let allPlants = Plant.all
 		let sortBtn = document.getElementById('plant-sort-button')
-		
+
 		if (sortBtn.innerHTML === "Sort Plants ↑") {
-			let sortedPlantsAscend = allPlants.sort((a,b) => (a.name > b.name) ? 1 :-1);
+			let sortedPlantsAscend = allPlants.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
 			sortBtn.innerHTML = "Sort Plants ↓";
 			plantsContainer.innerHTML = "";
 			sortedPlantsAscend.forEach(element => {
 				document.getElementById('plants-container').innerHTML += element.renderPlant();
 			}); 
-			Plant.getAllWaterButton();
-			Plant.getAllEditButton();	
 			
 		} else {
 			sortBtn.innerHTML = "Sort Plants ↑";
-			let sortedPlantsDescend = allPlants.sort((a,b) => (a.name < b.name) ? 1 :-1);
+			let sortedPlantsDescend = allPlants.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1);
 			plantsContainer.innerHTML = "";
 			sortedPlantsDescend.forEach(element => {
 				document.getElementById('plants-container').innerHTML += element.renderPlant();
 			}); 
-			Plant.getAllWaterButton();
-			Plant.getAllEditButton();	
 		}
+
+		Plant.getAllWaterButton();
+		Plant.getAllEditButton();	
+		Plant.getAllDeleteButton();	
 	};
 
 	static getAllWaterButton() {
@@ -191,9 +199,7 @@ class Plant {
 		let waterButton = document.getElementById("water-plant-" + plantID)
 		waterButton.disabled = true
 		let plantName = document.getElementById('name-'+plantID).value
-		// waterButton.innerText = "Watering " + plantName
-		waterButton.innerHTML = `
-		`
+		waterButton.innerText = "Watering " + plantName
 		const progressBar = document.getElementsByClassName('progress-bar'+plantID)[0]
 		
 		setInterval(() => {
@@ -201,8 +207,6 @@ class Plant {
 		  const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
 		  progressBar.style.setProperty('--width', width + .2)
 		}, 5)
-		
-
 
 			// this is where we're going to update the water button to a progress bar incrementing a percentage per second
 			// <div class="progress">
@@ -214,7 +218,6 @@ class Plant {
 			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">3 seconds</div>`
 			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">2 seconds</div>`
 			// document.getElementById("water-plant-" + plantID).innerHTML = `<div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">1 second</div>`
-
 
 		let plantWateredDuration = "last-watered-duration-" + plantID
 		let plantNewWaterDuration = parseInt(document.getElementById(plantWateredDuration).value)
@@ -238,6 +241,50 @@ class Plant {
 
 	};
 
+	static updateOnDom(plantObj) {
+		// get the plant card
+		let plantCard = document.getElementById('plants-card-'+plantObj.id)
+		let oldFarmID = document.getElementById('farm-name-'+plantObj.id)
+		let oldPlant = this.all.find(plant => plant.id === plantObj.id)
+		let farmNameSpan = document.getElementById('farm-name-label-'+plantObj.id)
+		console.log("plantObj: ", plantObj)
+		console.log("plantCard: ", plantCard)
+		console.log("oldPlant: ", oldPlant)
+
+		const farmName = document.getElementById("selected-"+plantObj.id)
+		const spanName = document.querySelector("#farm-name-label-"+plantObj.id)
+		spanName.innerHTML = farmName.innerText
+
+		// oldPlant.id = plantObj.id;
+		oldPlant.name = plantObj.name;
+		oldPlant.height = plantObj.height;
+		oldPlant.notes = plantObj.notes;
+		oldPlant.last_watered = plantObj.last_watered;
+		oldPlant.last_watered_amount = plantObj.last_watered_amount;
+		oldPlant.grow_zone = plantObj.grow_zone;
+		oldPlant.planted_date = plantObj.planted_date;
+		oldFarmID.selectedIndex = plantObj.farm_id+1;
+		// farmNameSpan.value = plantObj.farm_id+1
+	}
+
+				// document.getElementById('farm-name-5').selectedIndex = 4
+
+				// oldPlant.farm_name = plantObj.farm.name; // this works
+				// oldPlant.sensor_type = plantObj.sensor[0].sensor_type;
+				// oldPlant.mac_address = plantObj.sensor[0].mac_address;
+				
+				// this.constructor(plantObj)
+				
+				// oldPlant = Plant.plantObj
+				// plantCard.innerHTML = Plant.plantObj
+				// document.getElementById('plants-card-'+plantObj.id).innerHTML = ""
+
+				// Then in your updateOnDom method
+				// Make sure to have
+				// this.water_plant_shit = plant.watered_plant_shit
+				// The this will connect to the class object
+				// (Plant is whatever is passed through = json.data.attributes)
+
 	static getAllEditButton() {
 		let allEditButtons = Array.from(document.getElementsByClassName('edit-plant-button'))
 		allEditButtons.forEach( e => {e.addEventListener("click", Plant.editPlant)
@@ -258,7 +305,7 @@ class Plant {
 			document.getElementById("planted-date-" + plantID).disabled = false
 			document.getElementById("sensor-type-" + plantID).disabled = true
 			document.getElementById("mac-address-" + plantID).disabled = true
-			document.getElementById("farm-name-" + plantID).disabled = true
+			document.getElementById("farm-name-" + plantID).disabled = false
 			
 		} else if (e.target.innerText === "Save"){
 			e.target.innerText = "Edit"
@@ -266,7 +313,7 @@ class Plant {
 			document.getElementById("name-" + plantID).disabled = true
 			document.getElementById("height-" + plantID).disabled = true
 			document.getElementById("notes-" + plantID).disabled = true
-			document.getElementById("last-watered-" + plantID).disabled = true
+			document.getElementById("last-watered-" + plantID). disabled = true
 			document.getElementById("last-watered-duration-" + plantID).disabled = true
 			document.getElementById("grow-zone-" + plantID).disabled = true
 			document.getElementById("planted-date-" + plantID).disabled = true
@@ -283,11 +330,37 @@ class Plant {
 			let updatedPlantPlantedDate = document.getElementById("planted-date-" + plantID).value
 			let updatedPlantSensorType = document.getElementById("sensor-type-" + plantID).value
 			let updatedPlantMacAddress = document.getElementById("mac-address-" + plantID).value
-			let updatedPlantFarmName = document.getElementById("farm-name-" + plantID).value
+			// let updatedPlantFarmID = document.getElementById("farm-name-" + plantID).selectedIndex - 1
+			let updatedPlantFarmID = document.getElementById('farm-name-label-'+ plantID).value
 
-		plantAdapter.updatePlant(updatedPlantName, updatedPlantHeight, updatedPlantNotes, updatedPlantLastWatered,updatedPlantLastWateredDuration, updatedPlantGrowZone, updatedPlantPlantedDate, updatedPlantSensorType, updatedPlantMacAddress, updatedPlantFarmName, plantID)
+		plantAdapter.updatePlant(updatedPlantName, updatedPlantHeight, updatedPlantNotes, updatedPlantLastWatered,updatedPlantLastWateredDuration, updatedPlantGrowZone, updatedPlantPlantedDate, updatedPlantSensorType, updatedPlantMacAddress, updatedPlantFarmID, plantID)
 
 		}
+	}
+
+	// get all the delete buttons 
+	static getAllDeleteButton() {
+		let allDeleteButtons = Array.from(document.getElementsByClassName('delete-plant-button'))
+		allDeleteButtons.forEach( e => {e.addEventListener("click", Plant.deletePlant)
+		// console.log(e)
+		})
+	}	
+
+	// using e as the iterated element to be the exact delete button based on the plantID
+	static deletePlant(e) {
+		console.log('hello delete button')
+		let plantID = e.target.dataset.id
+		let plantsCard = document.getElementById("plants-card-" + plantID)		
+			// // find the exact plant based on the plant ID
+		let plantToDelete = Plant.all.find(x => x.id === parseInt(plantID))
+			// Get the index of the found plant
+		let index = Plant.all.indexOf(plantToDelete)
+			// Remove the plant from the Plant.all array
+		Plant.all.splice(index);
+			// empty the deleted plant card
+		plantsCard.innerHTML = "";
+			// send plant to delete to the adapter and then database
+		plantAdapter.deletePlant(plantID);
 
 	}
 
