@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	
 	document.getElementById('plant-submit').addEventListener("click", (e) => {
-		console.log("Added new plant with params ")
+		// console.log("Added new plant with params ")
 		e.preventDefault()
 		
 		const plantSubmitName = document.getElementById('plant-submit-name').value
@@ -67,8 +67,10 @@ function getPlants() {
 		Plant.getAllEditButton()	
 		Plant.getAllDeleteButton()	
 		Plant.sortButton()
+		Plant.darkMode()
 	})
 }
+
 
 function currentDateTime() {
 	let datetime = new Date;

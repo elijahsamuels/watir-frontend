@@ -74,3 +74,21 @@ class PlantAdapter {
 		.catch(e => console.log(e))
 	}
 }
+
+// interview Qs 
+// promises: special proxy
+// fetch
+/*
+be aware of structure of how things are done
+when to create a function
+closures 
+callbacks
+diff between ref a callback vs. instantiating 
+understanding the flow of new code
+algo problems - study these
+
+the hang
+problem solving skills and trainable
+cares and wants to get better
+
+*/

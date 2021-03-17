@@ -154,6 +154,28 @@ class Plant {
 		`
 	}
 
+	static darkMode() {
+		let darkModeBtn = document.getElementById('dark-mode').addEventListener('click', this.darkToLight)
+	}
+
+	static darkToLight() {
+		let darkLightButton = document.getElementById('dark-mode')
+
+		if (darkLightButton.innerText === "Dark Mode") {
+			console.log("dark mode")
+			document.getElementById('dark-mode').innerText = "Light Mode"
+			document.body.style.backgroundColor = "black";
+			
+		} else {
+			console.log("light mode")
+			document.getElementById('dark-mode').innerText = "Dark Mode"
+			document.body.style.backgroundColor = "white";
+		}
+	}
+
+
+
+
 	static sortButton() {
 		let sortBtn = document.getElementById('plant-sort-button').addEventListener('click', this.sortAllPlants)
 	};
