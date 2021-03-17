@@ -27,7 +27,6 @@ class PlantAdapter {
 					grow_zone: updatedPlantGrowZone, 
 					planted_date: updatedPlantPlantedDate, 
 					farm_id: updatedPlantFarmID
-
 					// farm: { 
 					// 	name: xxx,
 					// 	// id: updatedPlantFarmID,
@@ -62,27 +61,8 @@ class PlantAdapter {
 		// 	})
 
 
-		// #################
-		// 	.then(response => response.json())
-		// 	.then(plants => {
-		// 		plants.forEach(plant => {
-		// 			document.getElementById('plants-container').innerHTML += plant.renderPlant();
-		// 	})
-		// 	.catch(e => console.log(e))
-	
-		// })
-
-
 
 	}
-
-	// // optimistic rendering for deleting a plant
-	// deletePlant(plantID) {
-	// 	fetch(baseURL + plantID, {
-	// 		method: "DELETE",
-	// 		headers: {"Content-Type": "application/json"}
-	// 	})
-	// }
 
 	deletePlant(plantID) {
 		fetch(baseURL + plantID, {
@@ -90,20 +70,11 @@ class PlantAdapter {
 			headers: {"Content-Type": "application/json"}
 		})
 		.then(response => response.json())
-		.then(plants => {
-			plants.forEach(plant => {
-				document.getElementById('plants-container').innerHTML -= plant.renderPlant();
-			})
-			// adding the addEventListener for the buttons
-		})
+		// .then(plants => {
+		// 	plants.forEach(plant => {
+		// 		document.getElementById('plants-container').innerHTML = plant.renderPlant();
+		// 	})
+		// })
 		.catch(e => console.log(e))
-
 	}
-
-
-
 }
-
-
-// pessemistic rendering for edit and delete buttons
-

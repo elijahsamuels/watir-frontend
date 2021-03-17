@@ -66,7 +66,7 @@ function getPlants() {
 		Plant.getAllWaterButton()
 		Plant.getAllEditButton()	
 		Plant.getAllDeleteButton()	
-		Plant.sortButton()	
+		Plant.sortButton()
 	})
 }
 
@@ -90,7 +90,6 @@ function newDate() {
 function titleCase(str) {
 	return str.toLowerCase().split(' ').map((word) => word.replace(word[0], word[0].toUpperCase())).join(' ');
 	}
-
 
 // should move this over to the Plant class
 function postFetch(plant_submit_name, plant_submit_height, plant_submit_grow_zone, plant_submit_notes, plant_submit_sensor, plant_submit_senor_mac_address, farm_id) {

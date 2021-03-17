@@ -76,8 +76,8 @@ class Plant {
 						value="${this.last_watered_amount}" 
 						disabled="disabled" ><br>
 					
-			<!-- // PLANT GROW ZONE -->
-				<label for="${this.name}-${this.id}-grow-zone">Grow zone:</label>
+			<!-- // PLANT Hardiness ZONE -->
+				<label for="${this.name}-${this.id}-grow-zone">Hardiness zone:</label>
 				
 					<input type="text" 
 						id="grow-zone-${this.id}" 
@@ -153,7 +153,69 @@ class Plant {
 		</div>
 		`
 	}
-		
+	/*
+		function filterSearch() {
+			var input, filter, ul, li, a, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+
+			ul = document.getElementById("myUL");
+			li = ul.getElementsByTagName("li");
+
+			for (i = 0; i < li.length; i++) {
+				a = li[i].getElementsByTagName("a")[0];
+				txtValue = a.textContent || a.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					li[i].style.display = "";
+				} else {
+					li[i].style.display = "none";
+				}
+			}
+		}
+	*/
+
+	// let allEditButtons = Array.from(document.getElementsByClassName('edit-plant-button'))
+	// allEditButtons.forEach( e => {e.addEventListener("click", Plant.editPlant)
+	// })
+
+
+	// static editPlant(e) {
+	// 	let plantID = e.target.dataset.id
+	// 	if (e.target.innerText === "Edit"){
+	// 		e.target.innerText = "Save";
+
+
+
+	// static filterSearchField() {
+	// 	let input = document.getElementById('myInput').addEventListener('keyup', this.filterSearch)
+	// 	// Plant.all.forEach( e => {e, filterSearch(e)})
+	// };
+
+	// // function filterSearch(e) {
+	// // 	console.log(` ${e.code}`)
+	// //   };
+	  
+	// static filterSearch(e) {
+	// 	let plantID = e.target.dataset.id
+
+	// 	let allPlants = document.getElementsByClassName('plant-name') //.value
+	// 	let plantCard = document.getElementById('plants-card-'+this.id) 
+	// 	let input = document.getElementById("myInput");
+	// 	let filter = input.value.toUpperCase();
+	// 	let i = 0;
+
+	// 	for (i = 0; i < allPlants.length; i++) {
+	// 		let a = allPlants[i].value;
+	// 		if (a.toUpperCase().indexOf(filter) > -1) {
+	// 			plantCard.innerHTML = "";
+	// 		} else {
+	// 			allPlants[i].style.display = "none";
+	// 		}
+	// 	}
+	// }
+
+
+
 	static sortButton() {
 		let sortBtn = document.getElementById('plant-sort-button').addEventListener('click', this.sortAllPlants)
 	};
@@ -164,11 +226,12 @@ class Plant {
 
 		let allPlants = Plant.all
 		let sortBtn = document.getElementById('plant-sort-button')
+		plantsContainer.innerHTML = "";
 
 		if (sortBtn.innerHTML === "Sort Plants ↑") {
 			let sortedPlantsAscend = allPlants.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
 			sortBtn.innerHTML = "Sort Plants ↓";
-			plantsContainer.innerHTML = "";
+			// plantsContainer.innerHTML = "";
 			sortedPlantsAscend.forEach(element => {
 				document.getElementById('plants-container').innerHTML += element.renderPlant();
 			}); 
@@ -176,7 +239,7 @@ class Plant {
 		} else {
 			sortBtn.innerHTML = "Sort Plants ↑";
 			let sortedPlantsDescend = allPlants.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1);
-			plantsContainer.innerHTML = "";
+			// plantsContainer.innerHTML = "";
 			sortedPlantsDescend.forEach(element => {
 				document.getElementById('plants-container').innerHTML += element.renderPlant();
 			}); 
@@ -356,7 +419,7 @@ class Plant {
 			// Get the index of the found plant
 		let index = Plant.all.indexOf(plantToDelete)
 			// Remove the plant from the Plant.all array
-		Plant.all.splice(index);
+		Plant.all.splice(index, 1);
 			// empty the deleted plant card
 		plantsCard.innerHTML = "";
 			// send plant to delete to the adapter and then database
